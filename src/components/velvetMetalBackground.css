@@ -1,0 +1,47 @@
+.velvet-metal-bg {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at 20% 20%, #1a0f0a, #050505 80%),
+              linear-gradient(135deg, #302010, #0a0a0a);
+  background-blend-mode: multiply;
+  z-index: -3;
+  overflow: hidden;
+}
+
+/* Shimmer layer */
+.velvet-metal-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    125deg,
+    rgba(255, 215, 160, 0.15) 0%,
+    rgba(255, 255, 255, 0.05) 20%,
+    rgba(255, 200, 100, 0.15) 40%,
+    rgba(255, 255, 255, 0.05) 60%,
+    rgba(255, 215, 160, 0.15) 80%,
+    rgba(255, 255, 255, 0.05) 100%
+  );
+  background-size: 400% 400%;
+  animation: shimmer 20s linear infinite;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  z-index: -2;
+}
+
+/* Soft vignette */
+.velvet-metal-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, transparent 40%, rgba(0, 0, 0, 0.7) 100%);
+  z-index: -1;
+  pointer-events: none;
+}
+
+@keyframes shimmer {
+  from {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
+}

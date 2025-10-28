@@ -1,0 +1,34 @@
+{
+  "banners": [
+    {
+      "id": 1,
+      "image": "/images/banner/banner1.jpg",
+      "title": "",
+      "link": "/news/special-promotion"
+    },
+    {
+      "id": 2,
+      "image": "/images/banner/banner2.jpg",
+      "title": "",
+      "link": "/news/holiday-season"
+    },
+    {
+      "id": 3,
+      "image": "/images/banner/banner3.jpg",
+      "title": "",
+      "link": "/news/gourmet-experience"
+    },
+    {
+      "id": 4,
+      "image": "/images/banner/banner4.jpg",
+      "title": "$20 off for ALL BOOKINGS on 31st October!",
+      "link": "/news/halloween-special"
+    },
+    {
+      "id": 5,
+      "image": "/images/banner/banner5.jpg",
+      "title": "",
+      "link": "/news/celebration"
+    }
+  ]
+}
