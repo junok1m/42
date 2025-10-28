@@ -17,7 +17,7 @@ interface ModelProfile {
   height?: number;
   weight?: number;
   bust?: string;
-  dressSize?: string;
+  dressSize?: number;
   figure?: string;
   hair?: string;
   skin?: string;
