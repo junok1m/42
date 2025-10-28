@@ -5,10 +5,9 @@ import AboutPage from './AboutPage';
 import RatesPage from './RatesPage';
 import ContactPage from './ContactPage';
 
-
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/spitroast">
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/models/:name" element={<ModelProfilePage />} />
