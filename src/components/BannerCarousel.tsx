@@ -59,11 +59,11 @@ const BannerCarousel: React.FC<BannerCarouselProps> = ({ newsItems }) => {
           {newsItems.map((item) => (
             <div key={item.id} className="w-full flex-shrink-0 relative">
               <a href={item.link} className="block h-full">
-                <img
-                  src={item.image}
-                  alt={item.title}
-                  className="w-full h-full object-cover object-center"
-                />
+              <img
+  src={`${import.meta.env.BASE_URL}${item.image}`}
+  alt={item.title}
+  className="w-full h-full object-cover object-center"
+/>
                 {item.title && (
                   <div className="absolute inset-0 bg-black bg-opacity-30 flex items-end">
                     <div className="p-8 text-white">

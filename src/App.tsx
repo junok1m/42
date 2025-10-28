@@ -7,7 +7,7 @@ import ContactPage from './ContactPage';
 
 function App() {
   return (
-    <BrowserRouter basename="/spitroast">
+    <BrowserRouter basename={import.meta.env.BASE_URL}>
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/models/:name" element={<ModelProfilePage />} />

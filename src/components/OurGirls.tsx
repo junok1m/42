@@ -135,29 +135,33 @@ const OurGirls: React.FC<OurGirlsProps> = ({ models }) => {
                   }}
                   className="block cursor-pointer"
                 >
-                  <div className="relative overflow-visible transition-shadow">
-                    <div className="relative aspect-[2/3]">
-                      <div className="absolute inset-[2%] overflow-hidden shadow-[inset_0_0_20px_rgba(0,0,0,0.55)]">
-                        <img
-                          src={model.image}
-                          alt={model.name}
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
 
-                      {/* frame2 */}
-                      <img
-                        src="/frame2.svg"
-                        alt=""
-                        className="absolute inset-0 w-full h-full pointer-events-none z-10"
-                      />
 
-                      {/* gold halo */}
-                      {model.isCenter && (
-                        <div className="absolute inset-[-3%] rounded-lg blur-[3px] shadow-[0_0_40px_15px_rgba(191,166,99,0.15)] pointer-events-none z-20"></div>
 
-                      )}
-                    </div>
+<div className="relative transition-shadow">
+  <div className="relative aspect-[2/3]">
+
+    {/* gold halo BEHIND the image */}
+    {model.isCenter && (
+      <div className="absolute inset-[-3%] blur-[4px] shadow-[0_0_35px_10px_rgba(191,166,99,0.25)] pointer-events-none z-0"></div>
+    )}
+
+    {/* photo container */}
+    <div className="relative overflow-hidden border border-[#bfa663]/40 z-10">
+      <img
+        src={model.image}
+        alt={model.name}
+        className="w-full h-full object-cover rounded-none"
+      />
+      <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/10 via-transparent to-transparent" />
+    </div>
+  </div>
+
+
+
+
+
+
 
                     {/* hover overlay */}
                     {model.isCenter && (

@@ -64,50 +64,58 @@ const Roster: React.FC<RosterProps> = ({ rosterToday, rosterTomorrow }) => {
       id="roster"
       className="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-[#e8d6a8]"
     >
-      {/* Header */}
-      <div className="flex flex-col items-center mb-10">
-        <div className="inline-flex gap-10 md:gap-16">
-          {/* TODAY */}
-          <button
-            onClick={() => setActiveTab("today")}
-            className={`font-serif text-2xl md:text-3xl tracking-wide transition-all relative ${
-              activeTab === "today"
-                ? "text-transparent bg-clip-text bg-gradient-to-r from-[#e3d19b] to-[#bfa663] font-bold"
-                : "text-[#a79b7a] hover:text-[#d8bf7a]"
-            }`}
-          >
-            Roster&nbsp;Today
-            {activeTab === "today" && (
-              <span className="absolute -bottom-1 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#d8bf7a] to-transparent"></span>
-            )}
-          </button>
+{/* Header */}
+<div className="flex flex-col items-center mb-10 px-3">
+  <div className="flex justify-center items-center gap-6 sm:gap-10 md:gap-16 flex-nowrap text-center w-full max-w-[420px]">
+    {/* TODAY */}
+    <div className="relative flex-1 min-w-[120px]">
+      <button
+        onClick={() => setActiveTab("today")}
+        className={`font-serif text-xl sm:text-2xl md:text-3xl tracking-wide transition-all w-full relative ${
+          activeTab === "today"
+            ? "text-transparent bg-clip-text bg-gradient-to-r from-[#e3d19b] to-[#bfa663] font-bold"
+            : "text-[#a79b7a] hover:text-[#d8bf7a]"
+        }`}
+      >
+        Roster&nbsp;Today
+      </button>
 
-          {/* TOMORROW */}
-          <div className="relative">
-            <button
-              onClick={() => setActiveTab("tomorrow")}
-              disabled={!showTomorrowRoster}
-              className={`font-serif text-2xl md:text-3xl tracking-wide transition-all relative ${
-                activeTab === "tomorrow"
-                  ? "text-transparent bg-clip-text bg-gradient-to-r from-[#e3d19b] to-[#bfa663] font-bold"
-                  : showTomorrowRoster
-                  ? "text-[#a79b7a] hover:text-[#d8bf7a]"
-                  : "text-[#4b4638] cursor-not-allowed"
-              }`}
-            >
-              Roster&nbsp;Tomorrow
-              {activeTab === "tomorrow" && (
-                <span className="absolute -bottom-1 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#d8bf7a] to-transparent"></span>
-              )}
-            </button>
-            {!showTomorrowRoster && (
-              <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-1.5 bg-[#14120f]/90 border border-[#bfa663]/30 text-[#e8d6a8] text-xs whitespace-nowrap z-20 font-serif rounded">
-                Updates&nbsp;by&nbsp;6:00&nbsp;PM
-              </div>
-            )}
-          </div>
+      {/* underline */}
+      {activeTab === "today" && (
+        <span className="absolute -bottom-1 left-1/4 right-1/4 h-[1.5px] bg-gradient-to-r from-transparent via-[#d8bf7a] to-transparent" />
+      )}
+    </div>
+
+    {/* TOMORROW */}
+    <div className="relative flex-1 min-w-[120px]">
+      <button
+        onClick={() => setActiveTab("tomorrow")}
+        disabled={!showTomorrowRoster}
+        className={`font-serif text-xl sm:text-2xl md:text-3xl tracking-wide transition-all w-full relative ${
+          activeTab === "tomorrow"
+            ? "text-transparent bg-clip-text bg-gradient-to-r from-[#e3d19b] to-[#bfa663] font-bold"
+            : showTomorrowRoster
+            ? "text-[#a79b7a] hover:text-[#d8bf7a]"
+            : "text-[#4b4638] cursor-not-allowed"
+        }`}
+      >
+        Roster&nbsp;Tomorrow
+      </button>
+
+      {/* underline */}
+      {activeTab === "tomorrow" && (
+        <span className="absolute -bottom-1 left-1/4 right-1/4 h-[1.5px] bg-gradient-to-r from-transparent via-[#d8bf7a] to-transparent" />
+      )}
+
+      {!showTomorrowRoster && (
+        <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-1.5 bg-[#14120f]/90 border border-[#bfa663]/30 text-[#e8d6a8] text-[11px] whitespace-nowrap z-20 font-serif">
+          Updates&nbsp;by&nbsp;6:00&nbsp;PM
         </div>
-      </div>
+      )}
+    </div>
+  </div>
+</div>
+
 
       {/* “Tomorrow’s roster not ready” message */}
       {!showTomorrowRoster && activeTab === "tomorrow" && (

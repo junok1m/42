@@ -99,28 +99,27 @@ const RosterFilters: React.FC<RosterFiltersProps> = ({
       )}
 
       {/* side-by-side dropdowns */}
-      <div className="flex justify-center items-center gap-6 flex-nowrap w-full max-w-xl mx-auto">
-        {/* Nationality */}
-        <div className="relative">
-          <button
-            ref={nationalityBtn}
-            onClick={() => {
-              setIsDropdownOpen(!isDropdownOpen);
-              setIsServicesDropdownOpen(false);
-            }}
-            className="flex items-center justify-between gap-3 px-5 py-2 border border-[#bfa663]/40 text-[#e8d6a8] bg-[#14120f]/60 hover:bg-[#1a1813]/70 transition-all w-56 font-sans"
-          >
-            <span>
-              {selectedNationalities.length === 0
-                ? "All Nationalities"
-                : `${selectedNationalities.length} selected`}
-            </span>
-            <ChevronDown
-              className={`w-5 h-5 transition-transform ${
-                isDropdownOpen ? "rotate-180" : ""
-              }`}
-            />
-          </button>
+      <div className="flex justify-center gap-3 w-full max-w-[400px] mx-auto px-3">
+  <div className="relative flex-1 min-w-0">
+    <button
+      ref={nationalityBtn}
+      onClick={() => {
+        setIsDropdownOpen(!isDropdownOpen);
+        setIsServicesDropdownOpen(false);
+      }}
+      className="flex items-center justify-between gap-2 px-3 py-1.5 border border-[#bfa663]/40 text-[#e8d6a8] bg-[#14120f]/60 hover:bg-[#1a1813]/70 transition-all text-sm font-sans w-full truncate"
+    >
+      <span className="truncate">
+        {selectedNationalities.length === 0
+          ? "All Nationalities"
+          : `${selectedNationalities.length} selected`}
+      </span>
+      <ChevronDown
+        className={`w-4 h-4 transition-transform ${
+          isDropdownOpen ? "rotate-180" : ""
+        }`}
+      />
+    </button>
 
           {isDropdownOpen &&
             createPortal(
@@ -162,26 +161,27 @@ const RosterFilters: React.FC<RosterFiltersProps> = ({
         </div>
 
         {/* Services */}
-        <div className="relative">
-          <button
-            ref={serviceBtn}
-            onClick={() => {
-              setIsServicesDropdownOpen(!isServicesDropdownOpen);
-              setIsDropdownOpen(false);
-            }}
-            className="flex items-center justify-between gap-3 px-5 py-2 border border-[#bfa663]/40 text-[#e8d6a8] bg-[#14120f]/60 hover:bg-[#1a1813]/70 transition-all w-56 font-sans"
-          >
-            <span>
-              {selectedServices.length === 0
-                ? "All Services"
-                : `${selectedServices.length} selected`}
-            </span>
-            <ChevronDown
-              className={`w-5 h-5 transition-transform ${
-                isServicesDropdownOpen ? "rotate-180" : ""
-              }`}
-            />
-          </button>
+        <div className="relative flex-1 min-w-0">
+    <button
+      ref={serviceBtn}
+      onClick={() => {
+        setIsServicesDropdownOpen(!isServicesDropdownOpen);
+        setIsDropdownOpen(false);
+      }}
+      className="flex items-center justify-between gap-2 px-3 py-1.5 border border-[#bfa663]/40 text-[#e8d6a8] bg-[#14120f]/60 hover:bg-[#1a1813]/70 transition-all text-sm font-sans w-full truncate"
+    >
+      <span className="truncate">
+        {selectedServices.length === 0
+          ? "All Services"
+          : `${selectedServices.length} selected`}
+      </span>
+      <ChevronDown
+        className={`w-4 h-4 transition-transform ${
+          isServicesDropdownOpen ? "rotate-180" : ""
+        }`}
+      />
+    </button>
+  
 
           {isServicesDropdownOpen &&
             createPortal(
@@ -207,7 +207,7 @@ const RosterFilters: React.FC<RosterFiltersProps> = ({
                   {[
                     { key: "cim", label: "CIM" },
                     { key: "dfk", label: "DFK" },
-                    { key: "filming", label: "Filming OK" },
+                    { key: "filming", label: "Filming" },
                   ].map((s) => (
                     <label key={s.key}
                       className="flex items-center gap-3 px-4 py-2.5 hover:bg-[#1f1a12]/70 cursor-pointer">
