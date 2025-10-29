@@ -51,7 +51,7 @@ const RosterGrid: React.FC<RosterGridProps> = ({ models }) => {
     {model.name} · <span className="text-[11px] uppercase tracking-[0.15em] text-[#d2b97b]/80">{model.nationality}</span>
   </h3>
 
-  <p className="text-sm text-[#c9c2a2] font-sans flex items-center mb-1">
+  <p className="text-lg text-[#c9c2a2] font-sans flex items-center mb-1">
     <span className="w-2 h-2 bg-[#d2b97b] rounded-full mr-2 shadow-[0_0_6px_#bfa663]"></span>
     {model.workingTime}
   </p>
