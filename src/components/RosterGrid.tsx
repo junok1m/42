@@ -47,12 +47,8 @@ const RosterGrid: React.FC<RosterGridProps> = ({ models }) => {
 
 {/* Text info */}
 <div className="pl-4 mt-3">
-  <p className="text-[11px] uppercase tracking-[0.15em] text-[#d2b97b]/80 mb-1 font-serif">
-    {model.nationality}
-  </p>
-
   <h3 className="font-serif text-lg font-semibold bg-clip-text text-transparent bg-gradient-to-r from-[#e3d19b] to-[#bfa663] mb-1">
-    {model.name} (25)
+    {model.name} · <span className="text-[11px] uppercase tracking-[0.15em] text-[#d2b97b]/80">{model.nationality}</span>
   </h3>
 
   <p className="text-sm text-[#c9c2a2] font-sans flex items-center mb-1">
@@ -71,8 +67,7 @@ const RosterGrid: React.FC<RosterGridProps> = ({ models }) => {
       Next Available {stableAvailableTimes[model.id]}
     </p>
   )}
-</div>
-        </Link>
+</div>        </Link>
       ))}
     </div>
   );

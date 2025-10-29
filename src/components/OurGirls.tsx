@@ -153,7 +153,7 @@ const OurGirls: React.FC<OurGirlsProps> = ({ models }) => {
     
     <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/10 via-transparent to-transparent" />
   </div>
-  
+
 
 {/* 
 {model.isCenter && (
@@ -179,11 +179,11 @@ const OurGirls: React.FC<OurGirlsProps> = ({ models }) => {
                   {/* name below */}
                   {model.isCenter && (
                     <div className="text-center mt-4 px-2">
-                      <p className="text-xs font-serif text-[#e8d6a8]/70 tracking-wide mb-1">
+                      <p className="text-s font-serif text-[#e8d6a8]/70 tracking-wide mb-1">
                         {model.nationality}
                       </p>
-                      <h3 className="font-serif font-bold text-lg text-transparent bg-clip-text bg-gradient-to-r from-[#e8d6a8] to-[#bfa663] tracking-wide">
-                        {model.name} (25)
+                      <h3 className="font-serif font-bold text-xl text-transparent bg-clip-text bg-gradient-to-r from-[#e8d6a8] to-[#bfa663] tracking-wide">
+                        {model.name}
                       </h3>
                     </div>
                   )}

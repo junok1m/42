@@ -107,7 +107,7 @@ const RosterFilters: React.FC<RosterFiltersProps> = ({
         setIsDropdownOpen(!isDropdownOpen);
         setIsServicesDropdownOpen(false);
       }}
-      className="flex items-center justify-between gap-2 px-3 py-1.5 border border-[#bfa663]/40 text-[#e8d6a8] bg-[#14120f]/60 hover:bg-[#1a1813]/70 transition-all text-sm font-sans w-full truncate"
+      className="flex items-center justify-between gap-2 px-3 py-1.5 border border-[#bfa663]/40 text-[#e8d6a8] bg-[#14120f]/60 hover:bg-[#1a1813]/70 transition-all text-l font-sans w-full truncate"
     >
       <span className="truncate">
         {selectedNationalities.length === 0
@@ -168,7 +168,7 @@ const RosterFilters: React.FC<RosterFiltersProps> = ({
         setIsServicesDropdownOpen(!isServicesDropdownOpen);
         setIsDropdownOpen(false);
       }}
-      className="flex items-center justify-between gap-2 px-3 py-1.5 border border-[#bfa663]/40 text-[#e8d6a8] bg-[#14120f]/60 hover:bg-[#1a1813]/70 transition-all text-sm font-sans w-full truncate"
+      className="flex items-center justify-between gap-2 px-3 py-1.5 border border-[#bfa663]/40 text-[#e8d6a8] bg-[#14120f]/60 hover:bg-[#1a1813]/70 transition-all text-l font-sans w-full truncate"
     >
       <span className="truncate">
         {selectedServices.length === 0
