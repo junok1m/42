@@ -27,16 +27,16 @@ const AgeVerificationModal: React.FC<AgeVerificationModalProps> = ({ onAgree, on
         />
 
         {/* Title */}
-        <h2 className="text-2xl md:text-3xl font-serif font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-[#e8d6a8] to-[#bfa663] mb-6">
+        <h2 className="text-3xl md:text-3xl font-serif font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-[#e8d6a8] to-[#bfa663] mb-6">
           Age Verification
         </h2>
 
         {/* Message */}
         <div className="text-[#d8cfa5] text-center space-y-4 mb-8 font-light">
-          <p className="text-base md:text-lg leading-relaxed">
+          <p className="text-xl md:text-lg leading-relaxed">
             You must be 18 years or older to enter this establishment.
           </p>
-          <p className="text-sm text-[#bfa663]/60">
+          <p className="text-lg text-[#bfa663]/60">
             By entering, you confirm you meet the legal age requirement and accept our terms of service.
           </p>
         </div>
