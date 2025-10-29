@@ -205,16 +205,16 @@ const ModelProfilePage: React.FC = () => {
               {/* Rates - Clean, no wrapper */}
               <div className="flex justify-evenly text-center font-serif border-t border-b border-[#bfa663]/20 py-4">
                 <div className="px-4">
-                  <p className="text-xs uppercase tracking-widest text-[#bfa663]/80 mb-2">30 Min</p>
-                  <p className="text-2xl font-bold text-[#e8d6a8]">$180</p>
+                  <p className="text-lg uppercase tracking-widest text-[#bfa663]/80 mb-2">30 Min</p>
+                  <p className="text-3xl font-bold text-[#e8d6a8]">$180</p>
                 </div>
                 <div className="px-4">
-                  <p className="text-xs uppercase tracking-widest text-[#bfa663]/80 mb-2">45 Min</p>
-                  <p className="text-2xl font-bold text-[#e8d6a8]">$250</p>
+                  <p className="text-lg uppercase tracking-widest text-[#bfa663]/80 mb-2">45 Min</p>
+                  <p className="text-3xl font-bold text-[#e8d6a8]">$250</p>
                 </div>
                 <div className="px-4">
-                  <p className="text-xs uppercase tracking-widest text-[#bfa663]/80 mb-2">60 Min</p>
-                  <p className="text-2xl font-bold text-[#e8d6a8]">$320</p>
+                  <p className="text-lg uppercase tracking-widest text-[#bfa663]/80 mb-2">60 Min</p>
+                  <p className="text-3xl font-bold text-[#e8d6a8]">$320</p>
                 </div>
               </div>
             </div>
@@ -227,19 +227,19 @@ const ModelProfilePage: React.FC = () => {
   <h1 className="text-5xl font-serif font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#e8d6a8] to-[#bfa663] mb-2">
     {model.name}
   </h1>
-  <p className="text-sm font-serif text-[#bfa663]/80 uppercase tracking-widest mb-3">
+  <p className="text-3xl font-serif text-[#bfa663]/80 uppercase tracking-widest mb-3">
     {model.schedule || model.workingTime || "Check availability"}
   </p>
 
 
 
   {model.isAvailableNow ? (
-  <span className="inline-flex items-center gap-2 text-xs px-3 py-1 bg-[#0f1b0f]/80 text-[#b8ffb8] border border-[#90ff90]/60 font-serif uppercase tracking-widest">
+  <span className="inline-flex items-center gap-2 text-2xl px-3 py-1 bg-[#0f1b0f]/80 text-[#b8ffb8] border border-[#90ff90]/60 font-serif uppercase tracking-widest">
     <span className="inline-block w-2 h-2 bg-[#90ff90] rounded-full animate-pulse"></span>
     Available Now
   </span>
 ) : model.nextAvailable ? (
-  <span className="inline-flex items-center gap-2 text-xs px-3 py-1 bg-[#14120f]/80 text-[#e8d6a8] border border-[#bfa663]/60 font-serif uppercase tracking-widest animate-[pulseGold_2s_ease-in-out_infinite]">
+  <span className="inline-flex items-center gap-2 text-2xl px-3 py-1 bg-[#14120f]/80 text-[#e8d6a8] border border-[#bfa663]/60 font-serif uppercase tracking-widest animate-[pulseGold_2s_ease-in-out_infinite]">
     <span className="inline-block w-2 h-2 bg-[#bfa663] rounded-full animate-pulse"></span>
     Next Available · {model.nextAvailable}
   </span>
@@ -272,7 +272,7 @@ const ModelProfilePage: React.FC = () => {
               {/* Book Now Button - Standalone */}
               
                 <a href="tel:+61417888123"
-                className="block text-center px-6 py-3 font-serif text-base tracking-wide border border-[#bfa663]/50 bg-[#14120f]/60 text-[#e8d6a8] hover:shadow-[0_0_12px_rgba(191,166,99,0.6)] transition-all duration-500"
+                className="block text-center px-6 py-3 font-serif text-xl tracking-wide border border-[#bfa663]/50 bg-[#14120f]/60 text-[#e8d6a8] hover:shadow-[0_0_12px_rgba(191,166,99,0.6)] transition-all duration-500"
               >
                 <Phone className="inline-block w-4 h-4 mr-2" />
                 Book Now
@@ -283,68 +283,68 @@ const ModelProfilePage: React.FC = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {model.nationality && (
                     <div className="flex justify-between items-center py-2 border-b border-[#bfa663]/20">
-                      <span className="text-xs uppercase tracking-widest text-[#bfa663] font-serif">Nationality</span>
-                      <span className="text-base font-serif font-bold text-[#e8d6a8]">{model.nationality}</span>
+                      <span className="text-lg uppercase tracking-widest text-[#bfa663] font-serif">Nationality</span>
+                      <span className="text-lg font-serif font-bold text-[#e8d6a8]">{model.nationality}</span>
                     </div>
                   )}
                   {model.age && (
                     <div className="flex justify-between items-center py-2 border-b border-[#bfa663]/20">
-                      <span className="text-xs uppercase tracking-widest text-[#bfa663] font-serif">Age</span>
-                      <span className="text-base font-serif font-bold text-[#e8d6a8]">{model.age}</span>
+                      <span className="text-lg uppercase tracking-widest text-[#bfa663] font-serif">Age</span>
+                      <span className="text-lg font-serif font-bold text-[#e8d6a8]">{model.age}</span>
                     </div>
                   )}
                   {model.height && (
                     <div className="flex justify-between items-center py-2 border-b border-[#bfa663]/20">
-                      <span className="text-xs uppercase tracking-widest text-[#bfa663] font-serif">Height</span>
-                      <span className="text-base font-serif font-bold text-[#e8d6a8]">{model.height} cm</span>
+                      <span className="text-lg uppercase tracking-widest text-[#bfa663] font-serif">Height</span>
+                      <span className="text-lg font-serif font-bold text-[#e8d6a8]">{model.height} cm</span>
                     </div>
                   )}
                   {model.weight && (
                     <div className="flex justify-between items-center py-2 border-b border-[#bfa663]/20">
-                      <span className="text-xs uppercase tracking-widest text-[#bfa663] font-serif">Weight</span>
-                      <span className="text-base font-serif font-bold text-[#e8d6a8]">{model.weight} kg</span>
+                      <span className="text-lg uppercase tracking-widest text-[#bfa663] font-serif">Weight</span>
+                      <span className="text-lg font-serif font-bold text-[#e8d6a8]">{model.weight} kg</span>
                     </div>
                   )}
                   {model.bust && (
                     <div className="flex justify-between items-center py-2 border-b border-[#bfa663]/20">
-                      <span className="text-xs uppercase tracking-widest text-[#bfa663] font-serif">Bust</span>
-                      <span className="text-base font-serif font-bold text-[#e8d6a8]">{model.bust}</span>
+                      <span className="text-lg uppercase tracking-widest text-[#bfa663] font-serif">Bust</span>
+                      <span className="text-lg font-serif font-bold text-[#e8d6a8]">{model.bust}</span>
                     </div>
                   )}
                   {model.dressSize && (
                     <div className="flex justify-between items-center py-2 border-b border-[#bfa663]/20">
-                      <span className="text-xs uppercase tracking-widest text-[#bfa663] font-serif">Dress Size</span>
-                      <span className="text-base font-serif font-bold text-[#e8d6a8]">{model.dressSize}</span>
+                      <span className="text-lg uppercase tracking-widest text-[#bfa663] font-serif">Dress Size</span>
+                      <span className="text-lg font-serif font-bold text-[#e8d6a8]">{model.dressSize}</span>
                     </div>
                   )}
                   {model.figure && (
                     <div className="flex justify-between items-center py-2 border-b border-[#bfa663]/20">
-                      <span className="text-xs uppercase tracking-widest text-[#bfa663] font-serif">Figure</span>
-                      <span className="text-base font-serif font-bold text-[#e8d6a8]">{model.figure}</span>
+                      <span className="text-lg uppercase tracking-widest text-[#bfa663] font-serif">Figure</span>
+                      <span className="text-lg font-serif font-bold text-[#e8d6a8]">{model.figure}</span>
                     </div>
                   )}
                   {model.hair && (
                     <div className="flex justify-between items-center py-2 border-b border-[#bfa663]/20">
-                      <span className="text-xs uppercase tracking-widest text-[#bfa663] font-serif">Hair</span>
-                      <span className="text-base font-serif font-bold text-[#e8d6a8]">{model.hair}</span>
+                      <span className="text-lg uppercase tracking-widest text-[#bfa663] font-serif">Hair</span>
+                      <span className="text-lg font-serif font-bold text-[#e8d6a8]">{model.hair}</span>
                     </div>
                   )}
                   {model.skin && (
                     <div className="flex justify-between items-center py-2 border-b border-[#bfa663]/20">
-                      <span className="text-xs uppercase tracking-widest text-[#bfa663] font-serif">Skin</span>
-                      <span className="text-base font-serif font-bold text-[#e8d6a8]">{model.skin}</span>
+                      <span className="text-lg uppercase tracking-widest text-[#bfa663] font-serif">Skin</span>
+                      <span className="text-lg font-serif font-bold text-[#e8d6a8]">{model.skin}</span>
                     </div>
                   )}
                   {model.tattoos && (
                     <div className="flex justify-between items-center py-2 border-b border-[#bfa663]/20">
-                      <span className="text-xs uppercase tracking-widest text-[#bfa663] font-serif">Tattoos</span>
-                      <span className="text-base font-serif font-bold text-[#e8d6a8]">{model.tattoos}</span>
+                      <span className="text-lg uppercase tracking-widest text-[#bfa663] font-serif">Tattoos</span>
+                      <span className="text-lg font-serif font-bold text-[#e8d6a8]">{model.tattoos}</span>
                     </div>
                   )}
                   {model.pubes && (
                     <div className="flex justify-between items-center py-2 border-b border-[#bfa663]/20">
-                      <span className="text-xs uppercase tracking-widest text-[#bfa663] font-serif">Pubes</span>
-                      <span className="text-base font-serif font-bold text-[#e8d6a8]">{model.pubes}</span>
+                      <span className="text-lg uppercase tracking-widest text-[#bfa663] font-serif">Pubes</span>
+                      <span className="text-lg font-serif font-bold text-[#e8d6a8]">{model.pubes}</span>
                     </div>
                   )}
                 </div>
@@ -383,7 +383,7 @@ const ModelProfilePage: React.FC = () => {
                       ) : (
                         <X className="w-4 h-4 text-[#a4976c]/60 flex-shrink-0" />
                       )}
-                      <span className={`text-xs font-serif uppercase tracking-wider ${
+                      <span className={`text-lg font-serif uppercase tracking-wider ${
                         service.available ? '' : 'line-through'
                       }`}>
                         {service.name}
