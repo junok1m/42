@@ -139,43 +139,41 @@ const OurGirls: React.FC<OurGirlsProps> = ({ models }) => {
 
 
 <div className="relative transition-shadow">
-  <div className="relative aspect-[2/3]">
-
-    {/* gold halo BEHIND the image */}
+  <div className="relative aspect-[2/3] overflow-hidden border border-[#bfa663]/40">
+    {/* gold glow for center image */}
     {model.isCenter && (
-      <div className="absolute inset-[-3%] blur-[4px] shadow-[0_0_35px_10px_rgba(191,166,99,0.25)] pointer-events-none z-0"></div>
+      <div className="absolute inset-0 shadow-[0_0_35px_10px_rgba(191,166,99,0.25)] pointer-events-none"></div>
     )}
-
-    {/* photo container */}
-    <div className="relative overflow-hidden border border-[#bfa663]/40 z-10">
-      <img
-        src={model.image}
-        alt={model.name}
-        className="w-full h-full object-cover rounded-none"
-      />
-      <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/10 via-transparent to-transparent" />
-    </div>
+    
+    <img
+      src={model.image}
+      alt={model.name}
+      className="w-full h-full object-cover"
+    />
+    
+    <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/10 via-transparent to-transparent" />
   </div>
+  
+
+{/* 
+{model.isCenter && (
+<div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-500 z-30">
+<div className="absolute bottom-0 left-0 right-0 p-4">
+<span className="inline-block text-xs px-2 py-0.5 rounded-full border border-[#bfa663]/40 bg-[#1a1610]/60 text-[#e8d6a8] mb-2">
+{model.nationality}
+</span>
+<p className="text-[#fef9e7] font-serif text-lg font-semibold tracking-wide">
+{model.name}
+</p>
+</div>
+</div>
+)}
+*/}
 
 
 
 
 
-
-
-                    {/* hover overlay */}
-                    {model.isCenter && (
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-500 z-30">
-                        <div className="absolute bottom-0 left-0 right-0 p-4">
-                          <span className="inline-block text-xs px-2 py-0.5 rounded-full border border-[#bfa663]/40 bg-[#1a1610]/60 text-[#e8d6a8] mb-2">
-                            {model.nationality}
-                          </span>
-                          <p className="text-[#fef9e7] font-serif text-lg font-semibold tracking-wide">
-                            {model.name}
-                          </p>
-                        </div>
-                      </div>
-                    )}
                   </div>
 
                   {/* name below */}

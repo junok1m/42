@@ -35,51 +35,45 @@ const RosterGrid: React.FC<RosterGridProps> = ({ models }) => {
             </span>
           )}
 
-          {/* Framed image */}
+          {/* image */}
           <div className="relative aspect-[3/4]">
-            <div className="absolute inset-[18%] overflow-hidden rounded-[2px] shadow-[inset_0_0_20px_rgba(0,0,0,0.6)]">
+  <div className="absolute overflow-hidden">
               <img
                 src={model.image}
                 alt={model.name}
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
               />
             </div>
+            </div>
 
-            {/* Ornate frame */}
-            <img
-              src="/frame.svg"
-              alt=""
-              className="absolute inset-0 w-full h-full pointer-events-none select-none z-[1]"
-            />
-          </div>
 
-          {/* Text info */}
-          <div className="pl-4 mt-3">
-            <p className="text-[11px] uppercase tracking-[0.15em] text-[#d2b97b]/80 mb-1 font-serif">
-              {model.nationality}
-            </p>
+{/* Text info */}
+<div className="pl-4 mt-3">
+  <p className="text-[11px] uppercase tracking-[0.15em] text-[#d2b97b]/80 mb-1 font-serif">
+    {model.nationality}
+  </p>
 
-            <h3 className="font-serif text-lg font-semibold bg-clip-text text-transparent bg-gradient-to-r from-[#e3d19b] to-[#bfa663] mb-1">
-              {model.name} (25)
-            </h3>
+  <h3 className="font-serif text-lg font-semibold bg-clip-text text-transparent bg-gradient-to-r from-[#e3d19b] to-[#bfa663] mb-1">
+    {model.name} (25)
+  </h3>
 
-            <p className="text-sm text-[#c9c2a2] font-sans flex items-center mb-1">
-              <span className="w-2 h-2 bg-[#d2b97b] rounded-full mr-2 shadow-[0_0_6px_#bfa663]"></span>
-              {model.workingTime}
-            </p>
+  <p className="text-sm text-[#c9c2a2] font-sans flex items-center mb-1">
+    <span className="w-2 h-2 bg-[#d2b97b] rounded-full mr-2 shadow-[0_0_6px_#bfa663]"></span>
+    {model.workingTime}
+  </p>
 
-            {model.isAvailableNow ? (
-              <p className="text-[#aee3b0] font-sans text-sm flex items-center">
-                <span className="w-1.5 h-1.5 bg-[#98e0a5] rounded-full mr-2 animate-pulse shadow-[0_0_8px_#98e0a5]" />
-                Available&nbsp;Now
-              </p>
-            ) : (
-              <p className="text-[#8a877a] font-sans text-sm flex items-center">
-                <span className="w-1.5 h-1.5 bg-[#6f6b60] rounded-full mr-2" />
-                Next&nbsp;Available&nbsp;{stableAvailableTimes[model.id]}
-              </p>
-            )}
-          </div>
+  {model.isAvailableNow ? (
+    <p className="text-[#b8ffb8] font-sans text-sm font-semibold animate-pulse" style={{
+      textShadow: '0 0 10px rgba(184, 255, 184, 0.8), 0 0 20px rgba(184, 255, 184, 0.4)'
+    }}>
+      Available Now
+    </p>
+  ) : (
+    <p className="text-[#8a877a] font-sans text-sm">
+      Next Available {stableAvailableTimes[model.id]}
+    </p>
+  )}
+</div>
         </Link>
       ))}
     </div>
