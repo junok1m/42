@@ -66,7 +66,7 @@ const Roster: React.FC<RosterProps> = ({ rosterToday, rosterTomorrow }) => {
     >
 {/* Header */}
 <div className="flex flex-col items-center mb-10 px-3">
-  <div className="flex justify-center items-center gap-6 sm:gap-10 md:gap-16 flex-nowrap text-center w-full max-w-[420px]">
+  <div className="flex justify-center items-center gap-6 sm:gap-10 md:gap-16 flex-nowrap text-center w-[100%] md:w-full md:max-w-[500px] mx-auto">
     {/* TODAY */}
     <div className="relative flex-1 min-w-[120px]">
       <button
@@ -108,7 +108,7 @@ const Roster: React.FC<RosterProps> = ({ rosterToday, rosterTomorrow }) => {
       )}
 
       {!showTomorrowRoster && (
-        <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-1.5 bg-[#14120f]/90 border border-[#bfa663]/30 text-[#e8d6a8] text-[11px] whitespace-nowrap z-20 font-serif">
+        <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-1.5 bg-[#14120f]/90 border border-[#bfa663]/30 text-[#e8d6a8] text-[14px] whitespace-nowrap z-20 font-serif">
           Updates&nbsp;by&nbsp;6:00&nbsp;PM
         </div>
       )}

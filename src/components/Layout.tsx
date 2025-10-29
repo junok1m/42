@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Menu, X, Phone } from "lucide-react";
+import { Link } from 'react-router-dom';
+
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -33,14 +35,14 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-sm bg-black/70 border-b border-[#c3a45c]/30">
   <div className="max-w-6xl mx-auto px-6 flex justify-between items-center h-20">
     {/* Logo */}
-    <a
-      href="/"
+    <Link
+      to="/"
       className="font-serif text-3xl tracking-widest text-transparent bg-clip-text 
                  bg-gradient-to-r from-[#d8bf7a] to-[#b5934b] drop-shadow-[0_1px_6px_rgba(255,215,140,0.2)]
                  hover:brightness-125 transition duration-500"
     >
       Opulence
-    </a>
+    </Link>
 
     {/* Desktop menu */}
     <div className="hidden md:flex items-center space-x-10 text-[#d4c48e]/90 font-light tracking-wide">
@@ -50,29 +52,29 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         ["Roster", "/#roster"],
         ["Contact", "/contact"],
       ].map(([label, href]) => (
-        <a
+        <Link
           key={label}
-          href={href}
+          to={href}
           className="relative group font-serif hover:text-[#f3e4b0] transition-all duration-500"
         >
           {label}
           <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-[#c3a45c] group-hover:w-full transition-all duration-700 ease-in-out"></span>
-        </a>
+        </Link>
       ))}
     </div>
 
     {/* Right side: Book Now + Menu */}
     <div className="flex items-center space-x-4">
       {/* Book Now always visible */}
-      <a
-        href="tel:+61417888123"
+      <Link
+        to="tel:+61417888123"
         className="relative px-5 py-2 border border-[#b5934b]/70 text-[#d6c59b]
                    font-semibold tracking-wide hover:bg-[#b5934b]/10 hover:shadow-[inset_0_0_10px_rgba(181,147,75,0.4)]
                    transition-all duration-500 flex items-center gap-2 font-serif text-sm md:text-base"
       >
         <Phone className="w-4 h-4" />
         Book Now
-      </a>
+      </Link>
 
       {/* Mobile toggle */}
       <button
@@ -94,14 +96,14 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           ["Roster", "/#roster"],
           ["Contact", "/contact"],
         ].map(([label, href]) => (
-          <a
+          <Link
             key={label}
-            href={href}
+            to={href}
             className="block py-2 border-b border-[#b5934b]/10 hover:text-[#f3e4b0]"
             onClick={() => setIsMobileMenuOpen(false)}
           >
             {label}
-          </a>
+          </Link>
         ))}
       </div>
     </div>
@@ -127,9 +129,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         { name: "Contact", path: "/contact" }
       ].map((link) => (
         <li key={link.name}>
-          <a href={link.path} className="text-base hover:text-[#f3e4b0] transition-colors duration-500">
+          <Link to={link.path} className="text-base hover:text-[#f3e4b0] transition-colors duration-500">
             {link.name}
-          </a>
+          </Link>
         </li>
       ))}
     </ul>
