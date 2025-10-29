@@ -116,31 +116,31 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
 {/* --- FOOTER --- */}
 <footer className="relative z-10 mt-24 bg-gradient-to-b from-[#0d0d0d] to-black border-t border-[#b5934b]/30 pt-16 pb-8">
-  <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12">
-    <div>
-      <h3 className="text-[#d8bf7a] mb-3 tracking-wide uppercase text-m font-serif">Quick Links</h3>
-      <ul className="space-y-2 text-[#a79b7a] font-sans">
-        {[
-          { name: "Homepage", path: "/" },
-          { name: "Rate & Service", path: "/rates" },
-          { name: "Roster", path: "/roster" },
-          { name: "Contact", path: "/contact" }
-        ].map((link) => (
-          <li key={link.name}>
-            <a href={link.path} className="hover:text-[#f3e4b0] transition-colors duration-500">
-              {link.name}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </div>
-    <div>
-      <div className="text-[#a79b7a] space-y-1 font-sans">
-        <p className="block">Open daily 10 am until late</p>
-        <p className="block">5 Gerald Street, Marrickville 2204</p>
-      </div>
+<div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12">
+  <div>
+    <h3 className="text-[#d8bf7a] mb-3 tracking-wide uppercase text-base md:text-sm font-serif">Quick Links</h3>
+    <ul className="space-y-3 text-[#a79b7a] font-sans">
+      {[
+        { name: "Homepage", path: "/" },
+        { name: "Rate & Service", path: "/rates" },
+        { name: "Roster", path: "/roster" },
+        { name: "Contact", path: "/contact" }
+      ].map((link) => (
+        <li key={link.name}>
+          <a href={link.path} className="text-base hover:text-[#f3e4b0] transition-colors duration-500">
+            {link.name}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+  <div>
+    <div className="text-[#a79b7a] space-y-2 font-sans text-base">
+      <p className="block">Open daily 10 am until late</p>
+      <p className="block">5 Gerald Street, Marrickville 2204</p>
     </div>
   </div>
+</div>
   <div className="text-center text-[#72694f] text-sm mt-12 border-t border-[#b5934b]/10 pt-6 font-sans">
     © 2025 The Rotisserie. All rights reserved.
   </div>

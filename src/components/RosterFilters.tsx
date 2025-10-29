@@ -99,7 +99,7 @@ const RosterFilters: React.FC<RosterFiltersProps> = ({
       )}
 
       {/* side-by-side dropdowns */}
-      <div className="flex justify-center gap-3 w-full max-w-[400px] mx-auto px-3">
+      <div className="flex justify-center gap-3 w-[100%] md:w-full md:max-w-[500px] mx-auto">
   <div className="relative flex-1 min-w-0">
     <button
       ref={nationalityBtn}

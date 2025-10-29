@@ -35,16 +35,14 @@ const RosterGrid: React.FC<RosterGridProps> = ({ models }) => {
             </span>
           )}
 
-          {/* image */}
-          <div className="relative aspect-[3/4]">
-  <div className="absolute overflow-hidden">
-              <img
-                src={model.image}
-                alt={model.name}
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-              />
-            </div>
-            </div>
+{/* Image without frame */}
+<div className="relative w-full aspect-[3/4] overflow-hidden border border-[#bfa663]/30">
+  <img
+    src={model.image}
+    alt={model.name}
+    className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+  />
+</div>
 
 
 {/* Text info */}
