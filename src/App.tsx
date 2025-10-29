@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import Homepage from './Homepage';
 import ModelProfilePage from './ModelProfilePage';
 import AboutPage from './AboutPage';
@@ -7,7 +7,7 @@ import ContactPage from './ContactPage';
 
 function App() {
   return (
-    <BrowserRouter basename={import.meta.env.BASE_URL}>
+    <HashRouter>
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/models/:name" element={<ModelProfilePage />} />
@@ -15,7 +15,7 @@ function App() {
         <Route path="/rates" element={<RatesPage />} />
         <Route path="/contact" element={<ContactPage />} />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 

@@ -1,5 +1,7 @@
 import React, { useMemo } from "react";
 import type { RosterModel } from "../types/index.ts";
+import { Link } from 'react-router-dom';
+
 
 interface RosterGridProps {
   models: RosterModel[];
@@ -21,9 +23,9 @@ const RosterGrid: React.FC<RosterGridProps> = ({ models }) => {
   return (
     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5 md:gap-8">
       {models.map((model) => (
-        <a
+        <Link
           key={model.id}
-          href={model.profileLink}
+          to={model.profileLink}
           className="group block relative transition-transform duration-500 hover:-translate-y-1"
         >
           {/* NEW badge */}
@@ -78,7 +80,7 @@ const RosterGrid: React.FC<RosterGridProps> = ({ models }) => {
               </p>
             )}
           </div>
-        </a>
+        </Link>
       ))}
     </div>
   );
