@@ -47,8 +47,8 @@ const RosterGrid: React.FC<RosterGridProps> = ({ models }) => {
 
 {/* Text info */}
 <div className="pl-4 mt-3">
-  <h3 className="font-serif text-lg font-semibold bg-clip-text text-transparent bg-gradient-to-r from-[#e3d19b] to-[#bfa663] mb-1">
-    {model.name} · <span className="text-[11px] uppercase tracking-[0.15em] text-[#d2b97b]/80">{model.nationality}</span>
+  <h3 className="font-serif text-xl font-semibold bg-clip-text text-transparent bg-gradient-to-r from-[#e3d19b] to-[#bfa663] mb-1">
+    {model.name} · <span className="text-[16px] uppercase tracking-[0.15em] text-[#d2b97b]/80">{model.nationality}</span>
   </h3>
 
   <p className="text-lg text-[#c9c2a2] font-sans flex items-center mb-1">

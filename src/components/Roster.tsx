@@ -66,7 +66,7 @@ const Roster: React.FC<RosterProps> = ({ rosterToday, rosterTomorrow }) => {
     >
 {/* Header */}
 <div className="flex flex-col items-center mb-10 px-3">
-  <div className="flex justify-center items-center gap-6 sm:gap-10 md:gap-16 flex-nowrap text-center w-[100%] md:w-full md:max-w-[500px] mx-auto">
+  <div className="flex justify-center items-center gap-6 sm:gap-10 md:gap-16 flex-nowrap text-center w-full max-w-[420px]">
     {/* TODAY */}
     <div className="relative flex-1 min-w-[120px]">
       <button
