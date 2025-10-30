@@ -224,25 +224,31 @@ const ModelProfilePage: React.FC = () => {
               
               {/* Name + Working Hours - Just text, no box */}
 <div className="text-center lg:text-left">
-  <h1 className="text-5xl font-serif font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#e8d6a8] to-[#bfa663] mb-2">
-    {model.name}
-  </h1>
-  <p className="text-3xl font-serif text-[#bfa663]/80 uppercase tracking-widest mb-3">
-    {model.schedule || model.workingTime || "Check availability"}
-  </p>
+  <div className="flex flex-row justify-center lg:flex-row items-baseline lg:gap-4">
+    <h1 className="px-5 text-5xl font-serif font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#e8d6a8] to-[#bfa663]">
+      {model.name}
+    </h1>
+    <p className="px-5 text-3xl font-serif text-[#bfa663]/80 uppercase tracking-widest">
+      {model.schedule || model.workingTime || "Check availability"}
+    </p>
+  </div>
 
 
 
   {model.isAvailableNow ? (
-  <span className="inline-flex items-center gap-2 text-2xl px-3 py-1 bg-[#0f1b0f]/80 text-[#b8ffb8] border border-[#90ff90]/60 font-serif uppercase tracking-widest">
-    <span className="inline-block w-2 h-2 bg-[#90ff90] rounded-full animate-pulse"></span>
-    Available Now
-  </span>
+<span className="pt-5 inline-flex items-center gap-2 text-2xl font-serif uppercase tracking-widest text-[#b8ffb8] font-semibold animate-pulse" style={{
+  textShadow: '0 0 10px rgba(184, 255, 184, 0.8), 0 0 20px rgba(184, 255, 184, 0.4)'
+}}>
+
+  Available Now
+</span>
 ) : model.nextAvailable ? (
-  <span className="inline-flex items-center gap-2 text-2xl px-3 py-1 bg-[#14120f]/80 text-[#e8d6a8] border border-[#bfa663]/60 font-serif uppercase tracking-widest animate-[pulseGold_2s_ease-in-out_infinite]">
-    <span className="inline-block w-2 h-2 bg-[#bfa663] rounded-full animate-pulse"></span>
-    Next Available · {model.nextAvailable}
-  </span>
+<span className="pt-5 inline-flex items-center gap-2 text-2xl text-[#e8d6a8] font-serif uppercase tracking-widest animate-pulse" style={{
+  textShadow: '0 0 10px rgba(232, 214, 168, 0.8), 0 0 20px rgba(232, 214, 168, 0.4)'
+}}>
+  <span className="inline-block w-2 h-2 bg-[#e8d6a8] rounded-full animate-pulse"></span>
+  Next Available: {model.nextAvailable || "TBA"}
+</span>
 ) : null}
 
 <style>{`
@@ -279,7 +285,7 @@ const ModelProfilePage: React.FC = () => {
               </a>
 
               {/* Details List - Two columns, very readable */}
-              <div className="border border-[#bfa663]/30 bg-[#0b0b0b]/20 p-6">
+              <div className="bg-[#0b0b0b]/20 p-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {model.nationality && (
                     <div className="flex justify-between items-center py-2 border-b border-[#bfa663]/20">
