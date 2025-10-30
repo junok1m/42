@@ -6,12 +6,15 @@ export default {
   ],
   theme: {
     extend: {
-  fontFamily: {
-    serif: ['Cormorant Garamond', 'serif'],
-    display: ['Playfair Display', 'serif'],
-    sans: ['Inter', 'sans-serif'],
-  },
-},
+      fontSize: {
+        'base': '20px',
+      },
+      fontFamily: {
+        serif: ['Cormorant Garamond', 'serif'],
+        display: ['Playfair Display', 'serif'],
+        sans: ['Inter', 'sans-serif'],
+      },
+    },
   },
   plugins: [],
 }
