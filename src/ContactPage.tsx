@@ -1,212 +1,157 @@
-import React, { useState } from 'react';
-import { Phone, MapPin, Clock, Mail } from 'lucide-react';
+import React from 'react';
+import { MapPin, Phone, Clock, Briefcase, Navigation } from 'lucide-react';
 import Layout from './components/Layout';
 
-type ColorScheme = 'default' | 'goldNoir' | 'burgundyVelvet' | 'darkRose' | 'midnightGold';
-
 const ContactPage: React.FC = () => {
-  const [colorScheme, setColorScheme] = useState<ColorScheme>('default');
-
-  const schemes = {
-    default: {
-      bg: 'bg-gray-50',
-      card: 'bg-white shadow-xl',
-      text: 'text-gray-900',
-      subtext: 'text-gray-700',
-      phone: 'bg-pink-600 hover:bg-pink-700',
-      phoneIcon: 'bg-pink-100 text-pink-600',
-      addressIcon: 'bg-blue-100 text-blue-600',
-      emailIcon: 'bg-purple-100 text-purple-600',
-      clockIcon: 'bg-green-100 text-green-600',
-      banner: 'bg-pink-50 border-pink-200 text-gray-700',
-    },
-    goldNoir: {
-      bg: 'bg-gradient-to-br from-black via-zinc-900 to-black',
-      card: 'bg-gradient-to-br from-zinc-900 to-black shadow-2xl shadow-amber-900/20 border border-amber-900/20',
-      text: 'text-amber-100',
-      subtext: 'text-amber-200/80',
-      phone: 'bg-gradient-to-r from-amber-600 to-amber-500 hover:from-amber-500 hover:to-amber-400 shadow-lg shadow-amber-900/50',
-      phoneIcon: 'bg-amber-900/30 text-amber-400 border border-amber-800/30',
-      addressIcon: 'bg-amber-900/30 text-amber-400 border border-amber-800/30',
-      emailIcon: 'bg-amber-900/30 text-amber-400 border border-amber-800/30',
-      clockIcon: 'bg-amber-900/30 text-amber-400 border border-amber-800/30',
-      banner: 'bg-gradient-to-r from-amber-950/50 to-amber-900/30 border-amber-800/40 text-amber-100',
-    },
-    burgundyVelvet: {
-      bg: 'bg-gradient-to-br from-neutral-950 via-red-950 to-neutral-950',
-      card: 'bg-gradient-to-br from-red-950/40 via-neutral-900 to-red-950/40 shadow-2xl shadow-red-950/50 border border-red-900/30',
-      text: 'text-rose-100',
-      subtext: 'text-rose-200/80',
-      phone: 'bg-gradient-to-r from-rose-700 to-red-700 hover:from-rose-600 hover:to-red-600 shadow-lg shadow-rose-900/50',
-      phoneIcon: 'bg-red-950/50 text-rose-400 border border-red-900/40',
-      addressIcon: 'bg-red-950/50 text-rose-400 border border-red-900/40',
-      emailIcon: 'bg-red-950/50 text-rose-400 border border-red-900/40',
-      clockIcon: 'bg-red-950/50 text-rose-400 border border-red-900/40',
-      banner: 'bg-gradient-to-r from-red-950/40 to-rose-950/40 border-rose-900/40 text-rose-100',
-    },
-    darkRose: {
-      bg: 'bg-gradient-to-br from-gray-950 via-rose-950 to-gray-950',
-      card: 'bg-gradient-to-br from-gray-900 to-rose-950/50 shadow-2xl shadow-rose-950/60 border border-rose-900/30',
-      text: 'text-rose-50',
-      subtext: 'text-rose-100/80',
-      phone: 'bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-500 hover:to-pink-500 shadow-lg shadow-rose-900/50',
-      phoneIcon: 'bg-rose-950/60 text-rose-300 border border-rose-800/40',
-      addressIcon: 'bg-rose-950/60 text-rose-300 border border-rose-800/40',
-      emailIcon: 'bg-rose-950/60 text-rose-300 border border-rose-800/40',
-      clockIcon: 'bg-rose-950/60 text-rose-300 border border-rose-800/40',
-      banner: 'bg-gradient-to-r from-rose-950/40 to-pink-950/40 border-rose-800/40 text-rose-50',
-    },
-    midnightGold: {
-      bg: 'bg-gradient-to-br from-slate-950 via-indigo-950 to-slate-950',
-      card: 'bg-gradient-to-br from-slate-900 to-indigo-950/60 shadow-2xl shadow-indigo-950/60 border border-amber-900/20',
-      text: 'text-amber-50',
-      subtext: 'text-amber-100/80',
-      phone: 'bg-gradient-to-r from-amber-600 to-yellow-600 hover:from-amber-500 hover:to-yellow-500 shadow-lg shadow-amber-900/50',
-      phoneIcon: 'bg-indigo-950/60 text-amber-400 border border-amber-900/30',
-      addressIcon: 'bg-indigo-950/60 text-amber-400 border border-amber-900/30',
-      emailIcon: 'bg-indigo-950/60 text-amber-400 border border-amber-900/30',
-      clockIcon: 'bg-indigo-950/60 text-amber-400 border border-amber-900/30',
-      banner: 'bg-gradient-to-r from-indigo-950/50 to-slate-900/50 border-amber-900/30 text-amber-50',
-    },
-  };
-
-  const current = schemes[colorScheme];
-
   return (
     <Layout>
-      <div className={`min-h-screen ${current.bg} py-12`}>
-        <div className="max-w-4xl mx-auto px-4">
-          
-          {/* Color Scheme Switcher */}
-          <div className="mb-8 flex flex-wrap justify-center gap-3">
-            <button
-              onClick={() => setColorScheme('default')}
-              className={`px-6 py-2.5 rounded-lg font-semibold transition-all ${
-                colorScheme === 'default'
-                  ? 'bg-pink-600 text-white shadow-lg'
-                  : 'bg-white text-gray-700 hover:bg-gray-100 shadow'
-              }`}
-            >
-              Default
-            </button>
-            <button
-              onClick={() => setColorScheme('goldNoir')}
-              className={`px-6 py-2.5 rounded-lg font-semibold transition-all ${
-                colorScheme === 'goldNoir'
-                  ? 'bg-gradient-to-r from-amber-600 to-amber-500 text-white shadow-lg shadow-amber-900/50'
-                  : 'bg-gradient-to-r from-zinc-900 to-black text-amber-400 hover:from-zinc-800 hover:to-zinc-900 shadow border border-amber-900/30'
-              }`}
-            >
-              Gold Noir
-            </button>
-            <button
-              onClick={() => setColorScheme('burgundyVelvet')}
-              className={`px-6 py-2.5 rounded-lg font-semibold transition-all ${
-                colorScheme === 'burgundyVelvet'
-                  ? 'bg-gradient-to-r from-rose-700 to-red-700 text-white shadow-lg shadow-rose-900/50'
-                  : 'bg-gradient-to-r from-red-950 to-neutral-900 text-rose-300 hover:from-red-900 hover:to-neutral-800 shadow border border-red-900/40'
-              }`}
-            >
-              Burgundy Velvet
-            </button>
-            <button
-              onClick={() => setColorScheme('darkRose')}
-              className={`px-6 py-2.5 rounded-lg font-semibold transition-all ${
-                colorScheme === 'darkRose'
-                  ? 'bg-gradient-to-r from-rose-600 to-pink-600 text-white shadow-lg shadow-rose-900/50'
-                  : 'bg-gradient-to-r from-gray-900 to-rose-950 text-rose-200 hover:from-gray-800 hover:to-rose-900 shadow border border-rose-900/40'
-              }`}
-            >
-              Dark Rose
-            </button>
-            <button
-              onClick={() => setColorScheme('midnightGold')}
-              className={`px-6 py-2.5 rounded-lg font-semibold transition-all ${
-                colorScheme === 'midnightGold'
-                  ? 'bg-gradient-to-r from-amber-600 to-yellow-600 text-white shadow-lg shadow-amber-900/50'
-                  : 'bg-gradient-to-r from-slate-900 to-indigo-950 text-amber-300 hover:from-slate-800 hover:to-indigo-900 shadow border border-amber-900/30'
-              }`}
-            >
-              Midnight Gold
-            </button>
-          </div>
+      <section className="relative bg-gradient-to-b from-transparent via-[#0b0b0b]/90 to-transparent">
+        <div className="max-w-7xl mx-auto px-4 py-12 relative z-10">
 
-          <h1 className={`text-4xl font-bold ${current.text} mb-8 text-center tracking-wide`}>
-            Contact Us
-          </h1>
-
-          {/* Contact Card */}
-          <div className={`${current.card} rounded-2xl p-8 mb-8`}>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-24">
             
-            {/* Phone */}
-            <div className="mb-8">
-              <div className="flex items-center gap-3 mb-4">
-                <div className={`${current.phoneIcon} p-3 rounded-full`}>
-                  <Phone className="w-6 h-6" />
+            {/* Left Column - Map & Transport */}
+            <div className="space-y-12">
+              
+              {/* Map */}
+              <div>              
+                {/* Google Map Embed */}
+                <div className="aspect-square overflow-hidden mb-6 border border-[#bfa663]/40 shadow-[0_0_40px_rgba(191,166,99,0.15)]">
+                  <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3312.5147!2d151.1537!3d-33.9156!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzPCsDU0JzU2LjIiUyAxNTHCsDA5JzEzLjMiRQ!5e0!3m2!1sen!2sau!4v1234567890"
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    title="No.5 Marrickville Location"
+                  />
                 </div>
-                <h3 className={`text-lg font-semibold ${current.text}`}>Phone</h3>
+
+                {/* Get Directions Button */}
+                <a
+                  href="https://www.google.com/maps/dir/?api=1&destination=Sydenham+Station+Marrickville+NSW"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center gap-3 w-full 
+                    bg-[#14120f]/80 hover:bg-[#1a1813]
+                    border border-[#bfa663]/50 hover:border-[#bfa663]
+                    text-[#e8d6a8] font-serif font-bold py-4 px-6 
+                    transition-all duration-300
+                    shadow-[0_0_20px_rgba(191,166,99,0.15)]
+                    hover:shadow-[0_0_30px_rgba(191,166,99,0.3)]
+                    uppercase tracking-widest"
+                >
+                  <Navigation className="w-5 h-5" />
+                  Get Directions
+                </a>
               </div>
-              <a 
-                href="tel:+61417888123"
+
+              {/* Divider */}
+              <div className="h-px bg-gradient-to-r from-transparent via-[#bfa663]/40 to-transparent"></div>
+
+            </div>
+
+            {/* Right Column - Contact Info */}
+            <div className="space-y-12">
+              
+              {/* Contact Info */}
+              <div className="p-3">
+                <h2 className="text-4xl font-serif font-bold text-transparent bg-clip-text 
+                  bg-gradient-to-r from-[#e8d6a8] to-[#bfa663] mb-8 tracking-wide uppercase">
+                  Contact Us
+                </h2>
+                
+                <div className="space-y-8">
+                  {/* Phone */}
+                  <div>
+                    <div className="flex items-center gap-3 mb-4">
+                      <Phone className="w-6 h-6 text-[#bfa663]" />
+                      <h3 className="text-xl font-serif font-semibold text-[#e8d6a8] uppercase tracking-widest">Phone</h3>
+                    </div>
+                    <a 
+                      href="tel:+61417888123"
+                      className="block text-[#d8cfa5]/90 text-2xl font-serif font-bold hover:text-[#e8d6a8] transition-colors"
+                    >
+                      0417 888 123
+                    </a>
+                  </div>
+
+                  {/* Address */}
+                  <div>
+                    <div className="flex items-center gap-3 mb-4">
+                      <MapPin className="w-6 h-6 text-[#bfa663]" />
+                      <h3 className="text-xl font-serif font-semibold text-[#e8d6a8] uppercase tracking-widest">Address</h3>
+                    </div>
+                    <p className="text-[#d8cfa5]/90 text-xl font-serif leading-relaxed">
+                      Near Sydenham Station<br />
+                      Marrickville, NSW 2204
+                    </p>
+                  </div>
+
+                  {/* Hours */}
+                  <div>
+                    <div className="flex items-center gap-3 mb-4">
+                      <Clock className="w-6 h-6 text-[#bfa663]" />
+                      <h3 className="text-xl font-serif font-semibold text-[#e8d6a8] uppercase tracking-widest">Opening Hours</h3>
+                    </div>
+                    <p className="text-[#d8cfa5]/90 text-xl font-serif leading-relaxed">
+                      Open 7 Days a Week<br />
+                      9:00 AM - 2:00 AM
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+        
+
+
+
+          {/* Employment CTA - ONLY BOX */}
+          <div className="bg-[#14120f]/70 border border-[#bfa663]/30 p-8 shadow-[0_0_40px_rgba(191,166,99,0.15)]">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+              <div className="flex items-center gap-4">
+                <Briefcase className="w-8 h-8 text-[#bfa663] flex-shrink-0" />
+                <div>
+                  <h2 className="text-3xl font-serif font-bold text-transparent bg-clip-text 
+                    bg-gradient-to-r from-[#e8d6a8] to-[#bfa663] tracking-wide uppercase">
+                    Join Our Team
+                  </h2>
+                  <p className="text-[#d8cfa5]/90 font-serif text-xl">Earn top rates in a safe, professional environment</p>
+                </div>
+              </div>
+              <a
+                href="/employment"
+                className="flex-shrink-0 
+                  bg-[#14120f]/80 hover:bg-[#1a1813]
+                  border border-[#bfa663]/50 hover:border-[#bfa663]
+                  text-[#e8d6a8] font-serif font-bold py-4 px-8 
+                  transition-all duration-300
+                  shadow-[0_0_20px_rgba(191,166,99,0.15)]
+                  hover:shadow-[0_0_30px_rgba(191,166,99,0.3)]
+                  uppercase tracking-widest"
               >
-                0417 888 123
+                View Opportunities
               </a>
-            </div>
-
-            {/* Address */}
-            <div className="mb-8">
-              <div className="flex items-center gap-3 mb-4">
-                <div className={`${current.addressIcon} p-3 rounded-full`}>
-                  <MapPin className="w-6 h-6" />
-                </div>
-                <h3 className={`text-lg font-semibold ${current.text}`}>Address</h3>
-              </div>
-              <p className={`text-lg ${current.subtext} leading-relaxed`}>
-                Near Sydenham Station<br />
-                Marrickville, NSW 2204
-              </p>
-            </div>
-
-            {/* Email */}
-            <div className="mb-8">
-              <div className="flex items-center gap-3 mb-4">
-                <div className={`${current.emailIcon} p-3 rounded-full`}>
-                  <Mail className="w-6 h-6" />
-                </div>
-                <h3 className={`text-lg font-semibold ${current.text}`}>Email</h3>
-              </div>
-              <a 
-                href="mailto:info@n5m.au"
-                className={`text-lg ${current.subtext} hover:opacity-80 font-medium transition-opacity`}
-              >
-                info@n5m.au
-              </a>
-            </div>
-
-            {/* Hours */}
-            <div>
-              <div className="flex items-center gap-3 mb-4">
-                <div className={`${current.clockIcon} p-3 rounded-full`}>
-                  <Clock className="w-6 h-6" />
-                </div>
-                <h3 className={`text-lg font-semibold ${current.text}`}>Opening Hours</h3>
-              </div>
-              <p className={`text-lg ${current.subtext} leading-relaxed`}>
-                Open 7 Days a Week<br />
-                9:00 AM - 2:00 AM
-              </p>
             </div>
           </div>
 
-          {/* Quick Info */}
-          <div className={`${current.banner} rounded-2xl p-6 border text-center`}>
-            <p className="leading-relaxed">
-              <span className="font-semibold">Call us anytime</span> for bookings, enquiries, or to discuss your preferences with our friendly staff.
+          {/* SEO Hidden Text */}
+          <div className="sr-only">
+            <p>
+              N5M is Sydney's premier brothel without the exorbitant fees. We offer Sophisticated Elegance 
+              at the most affordable price without any compromise in quality and service. N5M is located near 
+              Sydenham train station, 10 minutes from Sydney CBD and 5 minutes from Sydney International airport. 
+              With a huge number of ladies associated with us, we have the right lady for every gentleman.
             </p>
           </div>
-
         </div>
-      </div>
+      </section>
     </Layout>
   );
 };

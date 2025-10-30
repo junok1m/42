@@ -103,15 +103,6 @@ const ModelProfilePage: React.FC = () => {
   return (
     <Layout>
       <section className="relative bg-gradient-to-b from-transparent via-[#0b0b0b]/90 to-transparent">
-        {/* Baroque wallpaper pattern */}
-        <div
-          className="absolute inset-0 opacity-[0.04] pointer-events-none mix-blend-soft-light"
-          style={{
-            backgroundImage: 'url("/ornament-bg.png")',
-            backgroundSize: "cover",
-            backgroundRepeat: "no-repeat",
-          }}
-        />
 
         <div className="max-w-6xl mx-auto px-4 py-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -124,18 +115,6 @@ const ModelProfilePage: React.FC = () => {
                   src={imageArray[currentImageIndex]}
                   alt={`${model.name} - Photo ${currentImageIndex + 1}`}
                   className="w-full h-full object-cover"
-                />
-                
-                {/* Corner ornaments */}
-                <img
-                  src="/corner-ornament.svg"
-                  alt=""
-                  className="absolute top-0 left-0 w-10 opacity-20"
-                />
-                <img
-                  src="/corner-ornament.svg"
-                  alt=""
-                  className="absolute bottom-0 right-0 w-10 rotate-180 opacity-20"
                 />
                 
                 {/* NEW Badge - Baroque style */}
@@ -246,7 +225,6 @@ const ModelProfilePage: React.FC = () => {
 <span className="pt-5 inline-flex items-center gap-2 text-2xl text-[#e8d6a8] font-serif uppercase tracking-widest animate-pulse" style={{
   textShadow: '0 0 10px rgba(232, 214, 168, 0.8), 0 0 20px rgba(232, 214, 168, 0.4)'
 }}>
-  <span className="inline-block w-2 h-2 bg-[#e8d6a8] rounded-full animate-pulse"></span>
   Next Available: {model.nextAvailable || "TBA"}
 </span>
 ) : null}
@@ -366,11 +344,6 @@ const ModelProfilePage: React.FC = () => {
 
               {/* Available Services - Baroque style */}
               <div className="relative bg-[#14120f]/70 border border-[#bfa663]/30 p-6 shadow-[0_0_30px_rgba(191,166,99,0.12)]">
-                <img
-                  src="/corner-ornament.svg"
-                  alt=""
-                  className="absolute bottom-0 left-0 w-8 opacity-20 rotate-180"
-                />
                 <h2 className="text-xl font-serif font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#e8d6a8] to-[#bfa663] mb-4 tracking-wide">
                   Available Services
                 </h2>

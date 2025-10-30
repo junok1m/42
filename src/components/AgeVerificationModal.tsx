@@ -14,17 +14,6 @@ const AgeVerificationModal: React.FC<AgeVerificationModalProps> = ({ onAgree, on
       {/* Modal Content */}
       <div className="relative z-10 bg-gradient-to-b from-[#0e0e0e] to-[#0b0b0b] border border-[#bfa663]/40 shadow-[0_0_50px_rgba(191,166,99,0.3)] max-w-md w-full mx-4 p-8">
         
-        {/* Corner ornaments */}
-        <img
-          src={`${import.meta.env.BASE_URL}corner-ornament.svg`}
-          alt=""
-          className="absolute top-0 left-0 w-8 opacity-20"
-        />
-        <img
-          src={`${import.meta.env.BASE_URL}corner-ornament.svg`}
-          alt=""
-          className="absolute bottom-0 right-0 w-8 rotate-180 opacity-20"
-        />
 
         {/* Title */}
         <h2 className="text-3xl md:text-3xl font-serif font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-[#e8d6a8] to-[#bfa663] mb-6">
