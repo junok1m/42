@@ -47,7 +47,6 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     {/* Desktop menu */}
     <div className="hidden md:flex items-center space-x-10 text-[#d4c48e]/90 font-light tracking-wide">
       {[
-        ["About Us", "/about"],
         ["Rate & Service", "/rates"],
         ["Roster", "/#roster"],
         ["Contact", "/contact"],
@@ -91,7 +90,6 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     <div className="md:hidden bg-black/90 border-t border-[#c3a45c]/30">
       <div className="px-4 py-4 space-y-4 font-light text-[#e7d9b2] font-serif">
         {[
-          ["About Us", "/about"],
           ["Rate & Service", "/rates"],
           ["Roster", "/#roster"],
           ["Contact", "/contact"],
