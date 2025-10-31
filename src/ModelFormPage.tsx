@@ -117,7 +117,7 @@ const ModelFormPage: React.FC = () => {
 
         {/* BASIC INFO */}
         <section>
-          <h2 className="text-[20px] font-medium mb-3 text-black">Basic Information</h2>
+          <h2 className="font-sans text-[20px] font-medium mb-3 text-black">Basic Information</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
               <label className="block mb-1 text-gray-700">Name</label>
@@ -153,7 +153,7 @@ const ModelFormPage: React.FC = () => {
         </section>
 {/* MEDIA */}
 <section>
-  <h2 className="text-black text-[20px] font-medium mb-3">Photos</h2>
+  <h2 className="font-sans text-black text-[20px] font-medium mb-3">Photos</h2>
 
   <div className="border border-gray-400 p-4 flex flex-col items-center justify-center text-gray-600 text-[16px] space-y-3">
     <div className="flex flex-col items-center">
@@ -193,7 +193,7 @@ const ModelFormPage: React.FC = () => {
 
         {/* RATES */}
         <section>
-          <h2 className="text-black text-[20px] font-medium mb-3">Rates</h2>
+          <h2 className="font-sans text-black text-[20px] font-medium mb-3">Rates</h2>
           <div className="overflow-x-auto">
             <table className="w-full border border-gray-300 text-left text-[16px]">
               <thead className="bg-gray-100 border-b border-gray-300">
@@ -237,7 +237,7 @@ const ModelFormPage: React.FC = () => {
 
         {/* PHYSICAL DETAILS */}
         <section>
-          <h2 className="text-black text-[20px] font-medium mb-3">Physical Details</h2>
+          <h2 className="font-sans text-black text-[20px] font-medium mb-3">Physical Details</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {(
   [
@@ -267,7 +267,7 @@ const ModelFormPage: React.FC = () => {
 
         {/* REQUIREMENTS */}
         <section>
-          <h2 className="text-black text-[20px] font-medium mb-3">Requirements</h2>
+          <h2 className="font-sans text-black text-[20px] font-medium mb-3">Requirements</h2>
           <textarea
             value={requirements}
             onChange={(e) => setRequirements(e.target.value)}
@@ -277,7 +277,7 @@ const ModelFormPage: React.FC = () => {
 
         {/* SERVICES */}
         <section>
-          <h2 className="text-black text-[20px] font-medium mb-3">Services Available</h2>
+          <h2 className="text-black text-[20px] font-medium mb-3 font-sans">Services Available</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
             {servicesList.map((service) => (
               <label key={service} className="flex items-center gap-2">
@@ -299,7 +299,7 @@ const ModelFormPage: React.FC = () => {
             type="submit"
             className="bg-black text-white px-5 py-2 text-[16px]"
           >
-            Save(Check it's public!)
+            Save(Check if it's checked public!)
           </button>
         </footer>
       </form>
