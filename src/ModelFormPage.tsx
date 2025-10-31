@@ -109,7 +109,7 @@ const ModelFormPage: React.FC = () => {
         className="w-full max-w-5xl p-6 md:p-10 space-y-10"
       >
         <header className="text-center">
-          <h1 className="text-black font-sans text-[20px] font-medium">New Model Form</h1>
+          <h1 className="text-black font-sans text-[20px] font-medium">New Provider Form</h1>
           <p className="text-gray-600 text-[16px] font-sans">
             Internal use only. Do not show or send.
           </p>
@@ -309,7 +309,7 @@ const ModelFormPage: React.FC = () => {
             type="submit"
             className="bg-black text-white px-5 py-2 text-[16px]"
           >
-            Save Model
+            Save(Check it's public!)
           </button>
         </footer>
       </form>
