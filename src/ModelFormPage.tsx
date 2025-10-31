@@ -206,44 +206,31 @@ const ModelFormPage: React.FC = () => {
                 </tr>
               </thead>
               <tbody>
-                {[
-                  ["30 mins", rate30House, setRate30House, rate30Provider, setRate30Provider, rate30Agent, setRate30Agent, rate30Total, setRate30Total],
-                  ["45 mins", rate45House, setRate45House, rate45Provider, setRate45Provider, rate45Agent, setRate45Agent, rate45Total, setRate45Total],
-                  ["60 mins", rate60House, setRate60House, rate60Provider, setRate60Provider, rate60Agent, setRate60Agent, rate60Total, setRate60Total],
-                ].map(([label, house, setHouse, provider, setProvider, agent, setAgent, total, setTotal]) => (
-                  <tr key={label as string} className="border-b border-gray-300">
-                    <td className="p-2">{label}</td>
-                    <td className="p-2">
-                      <input
-                        value={house as string}
-                        onChange={(e) => (setHouse as any)(e.target.value)}
-                        className="border border-gray-400 px-2 py-1 w-full"
-                      />
-                    </td>
-                    <td className="p-2">
-                      <input
-                        value={provider as string}
-                        onChange={(e) => (setProvider as any)(e.target.value)}
-                        className="border border-gray-400 px-2 py-1 w-full"
-                      />
-                    </td>
-                    <td className="p-2">
-                      <input
-                        value={agent as string}
-                        onChange={(e) => (setAgent as any)(e.target.value)}
-                        className="border border-gray-400 px-2 py-1 w-full"
-                      />
-                    </td>
-                    <td className="p-2">
-                      <input
-                        value={total as string}
-                        onChange={(e) => (setTotal as any)(e.target.value)}
-                        className="border border-gray-400 px-2 py-1 w-full"
-                      />
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
+  {(
+    [
+      ["30 mins", rate30House, setRate30House, rate30Provider, setRate30Provider, rate30Agent, setRate30Agent, rate30Total, setRate30Total],
+      ["45 mins", rate45House, setRate45House, rate45Provider, setRate45Provider, rate45Agent, setRate45Agent, rate45Total, setRate45Total],
+      ["60 mins", rate60House, setRate60House, rate60Provider, setRate60Provider, rate60Agent, setRate60Agent, rate60Total, setRate60Total],
+    ] as any[]
+  ).map(([label, house, setHouse, provider, setProvider, agent, setAgent, total, setTotal]) => (
+    <tr key={label} className="border-b border-gray-300">
+      <td className="p-2">{label}</td>
+      <td className="p-2">
+        <input value={house} onChange={(e) => setHouse(e.target.value)} className="border border-gray-400 px-2 py-1 w-full" />
+      </td>
+      <td className="p-2">
+        <input value={provider} onChange={(e) => setProvider(e.target.value)} className="border border-gray-400 px-2 py-1 w-full" />
+      </td>
+      <td className="p-2">
+        <input value={agent} onChange={(e) => setAgent(e.target.value)} className="border border-gray-400 px-2 py-1 w-full" />
+      </td>
+      <td className="p-2">
+        <input value={total} onChange={(e) => setTotal(e.target.value)} className="border border-gray-400 px-2 py-1 w-full" />
+      </td>
+    </tr>
+  ))}
+</tbody>
+
             </table>
           </div>
         </section>
@@ -252,26 +239,29 @@ const ModelFormPage: React.FC = () => {
         <section>
           <h2 className="text-black text-[20px] font-medium mb-3">Physical Details</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {[
-              ["Height", height, setHeight],
-              ["Weight", weight, setWeight],
-              ["Cup", cup, setCup],
-              ["Dress Size", dressSize, setDressSize],
-              ["Figure", figure, setFigure],
-              ["Hair", hair, setHair],
-              ["Skin", skin, setSkin],
-              ["Tattoo", tattoo, setTattoo],
-              ["Pubes", pubes, setPubes],
-            ].map(([label, val, setVal]) => (
-              <div key={label as string}>
-                <label className="block mb-1 text-gray-700">{label}</label>
-                <input
-                  value={val as string}
-                  onChange={(e) => (setVal as any)(e.target.value)}
-                  className="border border-gray-400 px-3 py-2 w-full"
-                />
-              </div>
-            ))}
+            {(
+  [
+    ["Height", height, setHeight],
+    ["Weight", weight, setWeight],
+    ["Cup", cup, setCup],
+    ["Dress Size", dressSize, setDressSize],
+    ["Figure", figure, setFigure],
+    ["Hair", hair, setHair],
+    ["Skin", skin, setSkin],
+    ["Tattoo", tattoo, setTattoo],
+    ["Pubes", pubes, setPubes],
+  ] as any[]
+).map(([label, val, setVal]) => (
+  <div key={label}>
+    <label className="block mb-1 text-gray-700">{label}</label>
+    <input
+      value={val}
+      onChange={(e) => setVal(e.target.value)}
+      className="border border-gray-400 px-3 py-2 w-full"
+    />
+  </div>
+))}
+
           </div>
         </section>
 
