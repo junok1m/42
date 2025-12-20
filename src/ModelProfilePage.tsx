@@ -33,8 +33,6 @@ interface ModelProfile {
   dfk: boolean;
   workingTime?: string;
   schedule?: string;
-  isAvailableNow?: boolean;
-  nextAvailable?: string;
   services?: Service[];
   bio?: string;
 }
@@ -212,22 +210,6 @@ const ModelProfilePage: React.FC = () => {
     </p>
   </div>
 
-
-
-  {model.isAvailableNow ? (
-<span className="pt-5 inline-flex items-center gap-2 text-2xl font-serif uppercase tracking-widest text-[#b8ffb8] font-semibold animate-pulse" style={{
-  textShadow: '0 0 10px rgba(184, 255, 184, 0.8), 0 0 20px rgba(184, 255, 184, 0.4)'
-}}>
-
-  Available Now
-</span>
-) : model.nextAvailable ? (
-<span className="pt-5 inline-flex items-center gap-2 text-2xl text-[#e8d6a8] font-serif uppercase tracking-widest animate-pulse" style={{
-  textShadow: '0 0 10px rgba(232, 214, 168, 0.8), 0 0 20px rgba(232, 214, 168, 0.4)'
-}}>
-  Next Available: {model.nextAvailable || "TBA"}
-</span>
-) : null}
 
 <style>{`
   @keyframes pulseGold {

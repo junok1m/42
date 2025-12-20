@@ -1,4 +1,3 @@
-import React, { useMemo } from "react";
 import type { RosterModel } from "../types/index.ts";
 import { Link } from 'react-router-dom';
 
@@ -8,17 +7,6 @@ interface RosterGridProps {
 }
 
 const RosterGrid: React.FC<RosterGridProps> = ({ models }) => {
-  const stableAvailableTimes = useMemo(() => {
-    return models.reduce((acc, model) => {
-      if (!model.isAvailableNow) {
-        const hour = Math.floor(Math.random() * 12) + 1;
-        const minute = ["00", "15", "30", "45"][Math.floor(Math.random() * 4)];
-        const period = Math.random() > 0.5 ? "PM" : "AM";
-        acc[model.id] = `${hour}:${minute} ${period}`;
-      }
-      return acc;
-    }, {} as Record<string, string>);
-  }, [models.length]);
 
   return (
     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5 md:gap-8">
@@ -56,17 +44,6 @@ const RosterGrid: React.FC<RosterGridProps> = ({ models }) => {
     {model.workingTime}
   </p>
 
-  {model.isAvailableNow ? (
-    <p className="text-[#b8ffb8] font-sans text-sm font-semibold animate-pulse" style={{
-      textShadow: '0 0 10px rgba(184, 255, 184, 0.8), 0 0 20px rgba(184, 255, 184, 0.4)'
-    }}>
-      Available Now
-    </p>
-  ) : (
-    <p className="text-[#8a877a] font-sans text-sm">
-      Next Available {stableAvailableTimes[model.id]}
-    </p>
-  )}
 </div>        </Link>
       ))}
     </div>
