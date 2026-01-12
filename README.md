@@ -1,159 +1,124 @@
-# 5web - Model Agency Website 🌟
+Nightshade Website (Roster-First Build)
+=======================================
 
-Built with **Vite + React + TypeScript + Tailwind CSS**
+This project is a **lean, roster-centric website** designed to prioritise daily browsing and fast navigation, without unnecessary marketing layers getting in the way.
 
-## 🚀 Quick Start
+Unlike the No5 site, this build intentionally strips things back and focuses on **what users actually click**.
 
-```bash
-# Install dependencies
-npm install
+* * * * *
 
-# Run development server
-npm run dev
-```
+Current Features
+----------------
 
-Open http://localhost:5173 in your browser! 🎉
+### ✅ Roster-First Homepage
 
-## 📦 What's Inside
+-   Homepage opens **directly to the roster**
 
-- ✅ Banner carousel with your 5 images (in `public/images/banner/`)
-- ✅ Roster system (Today/Tomorrow tabs)
-- ✅ Model portfolio carousel
-- ✅ Fully responsive design
-- ✅ Touch/swipe gestures
-- ✅ TypeScript + Tailwind CSS
-- ✅ **No vulnerabilities!** (thanks to Vite!)
+-   No hero sections, no banners pushing content down
 
-## 🎨 Adding Your Model Photos
+-   Designed for fast scanning and minimal scrolling
 
-1. Put model images in `public/images/models/`
-2. Update `src/Homepage.tsx` around line 25:
+### ✅ Advanced Filtering
 
-```typescript
-const models = [
-  {
-    id: 1,
-    name: 'Lily',
-    image: '/images/models/lily.jpg', // Update this
-    profileLink: '/models/lily'
-  },
-  // ... add more
-];
-```
+-   Filter by:
 
-## 🌐 Deploy to GitHub Pages
+    -   Nationality
 
-### 1. Update Your Username
+    -   Services
 
-In `package.json` line 6, change:
-```json
-"homepage": "https://YOUR-USERNAME.github.io/5web",
-```
+-   Filters apply instantly to the roster grid
 
-And in `vite.config.ts` line 7:
-```typescript
-base: '/5web/', // Your repo name
-```
+### ✅ Smart Navigation (The Good Stuff)
 
-### 2. Deploy
+-   When a user:
 
-```bash
-# Initialize git
-git init
-git add .
-git commit -m "Initial commit"
+    1.  Selects filters
 
-# Push to GitHub (replace YOUR-USERNAME)
-git remote add origin https://github.com/YOUR-USERNAME/5web.git
-git branch -M main
-git push -u origin main
+    2.  Clicks a girl profile
 
-# Deploy!
-npm run deploy
-```
+    3.  Clicks **Back to Roster**
 
-Your site will be live at: `https://YOUR-USERNAME.github.io/5web`
+-   👉 **All filters are preserved**
 
-## 📝 Available Commands
+-   No reset, no rage, no re-clicking
 
-```bash
-npm run dev       # Start dev server (http://localhost:5173)
-npm run build     # Build for production
-npm run preview   # Preview production build
-npm run deploy    # Deploy to GitHub Pages
-```
+This is done via browser history navigation rather than re-routing, keeping state intact.
 
-## 📁 Project Structure
+### ✅ Individual Profile Pages
 
-```
-5web/
-├── public/
-│   └── images/
-│       └── banner/          # Your 5 banner images
-├── src/
-│   ├── Homepage.tsx         # Main component
-│   ├── App.tsx             # App wrapper
-│   ├── main.tsx            # Entry point
-│   └── index.css           # Tailwind styles
-├── package.json
-├── vite.config.ts          # Vite configuration
-└── tailwind.config.js      # Tailwind configuration
-```
+-   Dedicated profile page per model
 
-## 🎯 Customization
+-   Image carousel
 
-### Change Company Name
-Search "ELITE MODELS" in `src/Homepage.tsx`
+-   Rates (30 / 45 / 60)
 
-### Update Contact Info
-Edit footer in `src/Homepage.tsx`
+-   Services availability
 
-### Adjust Carousel Timing
-Change intervals in the `useEffect` hooks in `Homepage.tsx`
+-   Clean back navigation to roster
 
-## 💡 Why Vite?
+* * * * *
 
-- ⚡ Lightning fast hot reload
-- 🔧 No configuration needed
-- 📦 Smaller bundle sizes
-- 🐛 No vulnerabilities
-- 🚀 Better developer experience
+Intentionally Not Included (For Now)
+------------------------------------
 
-## 🆘 Troubleshooting
+### ❌ News Banner
 
-### Port already in use?
-```bash
-# Vite will auto-increment to 5174, 5175, etc.
-# Or specify a port:
-npm run dev -- --port 3000
-```
+-   No homepage news banner
 
-### Images not showing?
-- Check they're in `public/images/banner/`
-- Paths should start with `/images/...`
+-   Reason:
 
-### Build fails?
-```bash
-rm -rf node_modules package-lock.json
-npm install
-npm run build
-```
+    -   Not all venues need constant announcements
 
-## 📚 Tech Stack
+    -   Avoids pushing roster content below the fold
 
-- **Vite** - Build tool
-- **React 19** - UI framework
-- **TypeScript** - Type safety
-- **Tailwind CSS** - Styling
-- **Lucide React** - Icons
-- **gh-pages** - Deployment
+-   Can be added later **without refactoring core layout**
 
----
+### ❌ "Our Girls" Carousel
 
-**Next Steps:**
-1. `npm install`
-2. `npm run dev`
-3. Add your model photos
-4. Deploy to GitHub Pages!
+-   No separate carousel section
 
-Made with ❤️ - Happy coding!
+-   Reason:
+
+    -   This site relies on **daily rosters**, not weekly marketing
+
+    -   Carousel makes more sense once:
+
+        -   Weekly roster data exists
+
+        -   Or static "featured girls" become relevant
+
+-   Planned as a **future enhancement**, not removed permanently
+
+* * * * *
+
+Design Philosophy
+-----------------
+
+-   **Roster over marketing**
+
+-   **Speed over decoration**
+
+-   **State preserved > fancy routing**
+
+-   Features are added **only when justified by real usage**
+
+This keeps the site:
+
+-   Easier to maintain
+
+-   Faster to load
+
+-   Less fragile when requirements change
+
+* * * * *
+
+Future Enhancements (Optional)
+------------------------------
+
+-   Weekly roster support
+
+-   Re-introduce girl carousel when weekly data exists
+
+-   Optional news banner module (plug-and-play)
+
+-   Deep-linked filtered URLs (if SEO becomes a priority)
