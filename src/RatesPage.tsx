@@ -20,14 +20,14 @@ const RatesPage: React.FC = () => {
             <div className="flex items-start gap-4">
               <Info className="w-6 h-6 text-[#bfa663] mt-1 flex-shrink-0" />
               <div>
-                <h3 className="text-2xl font-serif font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#e8d6a8] to-[#bfa663] mb-4 tracking-wide uppercase">
+                <h3 className="text-3xl font-serif font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#e8d6a8] to-[#bfa663] mb-4 tracking-wide uppercase">
                   Pricing Information
                 </h3>
-                <p className="text-[#d8cfa5]/90 font-serif leading-relaxed mb-3">
+                <p className="text-2xl text-[#d8cfa5]/90 font-serif leading-relaxed mb-3">
                   Prices vary depending on the lady and services provided. Some ladies may charge different 
                   rates from the table below.
                 </p>
-                <p className="text-[#e8d6a8] font-serif leading-relaxed font-semibold">
+                <p className="text-[#e8d6a8] font-serif leading-relaxed">
                   For accurate pricing, please enquire directly with our friendly staff when you call.
                 </p>
               </div>

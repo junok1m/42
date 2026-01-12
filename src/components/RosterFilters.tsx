@@ -4,6 +4,7 @@ import { ChevronDown, X } from "lucide-react";
 
 interface RosterFiltersProps {
   allNationalities: string[];
+  allServices: string[]; // ✅ NEW
   selectedNationalities: string[];
   selectedServices: string[];
   isDropdownOpen: boolean;
@@ -16,8 +17,10 @@ interface RosterFiltersProps {
   setSelectedServices: (s: string[]) => void;
 }
 
+
 const RosterFilters: React.FC<RosterFiltersProps> = ({
   allNationalities,
+  allServices,
   selectedNationalities,
   selectedServices,
   isDropdownOpen,
@@ -204,22 +207,21 @@ const RosterFilters: React.FC<RosterFiltersProps> = ({
                   </button>
                 </div>
                 <div className="font-sans text-[#e8d6a8]">
-                  {[
-                    { key: "cim", label: "CIM" },
-                    { key: "dfk", label: "DFK" },
-                    { key: "filming", label: "Filming" },
-                  ].map((s) => (
-                    <label key={s.key}
-                      className="flex items-center gap-3 px-4 py-2.5 hover:bg-[#1f1a12]/70 cursor-pointer">
-                      <input
-                        type="checkbox"
-                        checked={selectedServices.includes(s.key)}
-                        onChange={() => toggleService(s.key)}
-                        className="accent-[#bfa663] w-4 h-4"
-                      />
-                      {s.label}
-                    </label>
-                  ))}
+                  {allServices.map((name) => (
+  <label
+    key={name}
+    className="flex items-center gap-3 px-4 py-2.5 hover:bg-[#1f1a12]/70 cursor-pointer"
+  >
+    <input
+      type="checkbox"
+      checked={selectedServices.includes(name)}
+      onChange={() => toggleService(name)}
+      className="accent-[#bfa663] w-4 h-4"
+    />
+    {name}
+  </label>
+))}
+
                 </div>
               </div>,
               document.body

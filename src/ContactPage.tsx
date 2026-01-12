@@ -18,7 +18,7 @@ const ContactPage: React.FC = () => {
                 {/* Google Map Embed */}
                 <div className="aspect-square overflow-hidden mb-6 border border-[#bfa663]/40 shadow-[0_0_40px_rgba(191,166,99,0.15)]">
                   <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3312.5147!2d151.1537!3d-33.9156!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzPCsDU0JzU2LjIiUyAxNTHCsDA5JzEzLjMiRQ!5e0!3m2!1sen!2sau!4v1234567890"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3314.7366208057856!2d151.1233667!3d-33.819109299999994!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b12a59bd179ab0d%3A0x626e444e472f57b7!2s42%20Buffalo%20Rd%2C%20Gladesville%20NSW%202111!5e0!3m2!1sen!2sau!4v1768173307743!5m2!1sen!2sau"
                     width="100%"
                     height="100%"
                     style={{ border: 0 }}
@@ -31,7 +31,7 @@ const ContactPage: React.FC = () => {
 
                 {/* Get Directions Button */}
                 <a
-                  href="https://www.google.com/maps/dir/?api=1&destination=Sydenham+Station+Marrickville+NSW"
+                  href="https://www.google.com/maps/dir//42+Buffalo+Rd+Gladesville+NSW+2111/@-33.8191093,151.1233667,16z/data=!4m5!4m4!1m0!1m2!1m1!1s0x6b12a59bd179ab0d:0x626e444e472f57b7"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-center gap-3 w-full 
@@ -74,7 +74,7 @@ const ContactPage: React.FC = () => {
                       href="tel:+61417888123"
                       className="block text-[#d8cfa5]/90 text-2xl font-serif font-bold hover:text-[#e8d6a8] transition-colors"
                     >
-                      0417 888 123
+                      0498 100 011
                     </a>
                   </div>
 
@@ -85,8 +85,8 @@ const ContactPage: React.FC = () => {
                       <h3 className="text-xl font-serif font-semibold text-[#e8d6a8] uppercase tracking-widest">Address</h3>
                     </div>
                     <p className="text-[#d8cfa5]/90 text-xl font-serif leading-relaxed">
-                      Near Sydenham Station<br />
-                      Marrickville, NSW 2204
+                      42 Buffalo Road<br />
+                      Gladesville, NSW 2111
                     </p>
                   </div>
 
@@ -98,7 +98,7 @@ const ContactPage: React.FC = () => {
                     </div>
                     <p className="text-[#d8cfa5]/90 text-xl font-serif leading-relaxed">
                       Open 7 Days a Week<br />
-                      9:00 AM - 2:00 AM
+                      10:00 AM - 3:00 AM
                     </p>
                   </div>
                 </div>

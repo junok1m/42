@@ -41,7 +41,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                  bg-gradient-to-r from-[#d8bf7a] to-[#b5934b] drop-shadow-[0_1px_6px_rgba(255,215,140,0.2)]
                  hover:brightness-125 transition duration-500"
     >
-      Opulence
+      The Nightshade
     </Link>
 
     {/* Desktop menu */}
@@ -66,10 +66,10 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     <div className="flex items-center space-x-4">
       {/* Book Now always visible */}
       <Link
-        to="tel:+61417888123"
+        to="tel:+61498100011"
         className="relative px-5 py-2 border border-[#b5934b]/70 text-[#d6c59b]
                    font-semibold tracking-wide hover:bg-[#b5934b]/10 hover:shadow-[inset_0_0_10px_rgba(181,147,75,0.4)]
-                   transition-all duration-500 flex items-center gap-2 font-serif text-sm md:text-base"
+                   transition-all duration-500 flex items-center gap-2 font-serif text-lg md:text-base"
       >
         <Phone className="w-4 h-4" />
         Book Now
@@ -88,7 +88,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   {/* Mobile dropdown (no book now inside anymore) */}
   {isMobileMenuOpen && (
     <div className="md:hidden bg-black/90 border-t border-[#c3a45c]/30">
-      <div className="px-4 py-4 space-y-4 font-light text-[#e7d9b2] font-serif">
+      <div className="text-2xl px-10 py-4 space-y-4 font-light text-[#e7d9b2] font-serif">
         {[
           ["Rate & Service", "/rates"],
           ["Roster", "/#roster"],
@@ -123,7 +123,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       {[
         { name: "Homepage", path: "/" },
         { name: "Rate & Service", path: "/rates" },
-        { name: "Roster", path: "/roster" },
+        { name: "Roster", path: "/#roster" },
         { name: "Contact", path: "/contact" }
       ].map((link) => (
         <li key={link.name}>
@@ -137,7 +137,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   <div>
     <div className="text-[#a79b7a] space-y-2 font-sans text-base">
       <p className="block">Open daily 10 am until late</p>
-      <p className="block">5 Gerald Street, Marrickville 2204</p>
+      <p className="block">42 Buffalo Road, Gladesville 2111</p>
+      <p className="block">0498 100 011</p>
     </div>
   </div>
 </div>
