@@ -8,8 +8,8 @@ export default defineConfig({
       "/api": {
         target: "https://thenightshade.com.au",
         changeOrigin: true,
-        secure: true,
-        rewrite: (path) => path.replace(/^\/api/, ""),
+        secure: true
+        // ✅ remove rewrite
       },
     },
   },
