@@ -121,4 +121,4 @@ Future Enhancements (Optional)
 
 -   Optional news banner module (plug-and-play)
 
--   Deep-linked filtered URLs (if SEO becomes a priority)
+-   Deep-linked filtered URLs (if SEO becomes a priority)git 

@@ -63,6 +63,15 @@
     background: linear-gradient(to bottom, #ffd700, #d4af37);
   }
 }
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 6px rgba(182, 74, 74, 0.6); }
+  50% { box-shadow: 0 0 14px rgba(182, 74, 74, 0.9); }
+}
+
+@keyframes goldGlow {
+  0%, 100% { box-shadow: 0 0 6px rgba(191, 166, 99, 0.6); }
+  50% { box-shadow: 0 0 14px rgba(191, 166, 99, 0.95); }
+}
 
 /* Smooth scrolling */
 html {
