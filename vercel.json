@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "https://thenightshade.com.au/api/$1"
+      "destination": "https://thenightshade.com.au/$1"
     },
     {
       "source": "/(.*)",
