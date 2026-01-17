@@ -71,7 +71,7 @@ const ContactPage: React.FC = () => {
                       <h3 className="text-xl font-serif font-semibold text-[#e8d6a8] uppercase tracking-widest">Phone</h3>
                     </div>
                     <a 
-                      href="tel:+61417888123"
+                      href="tel:+61498100011"
                       className="block text-[#d8cfa5]/90 text-2xl font-serif font-bold hover:text-[#e8d6a8] transition-colors"
                     >
                       0498 100 011

@@ -3,9 +3,9 @@ import Layout from "./components/Layout";
 import Roster from "./components/Roster";
 import type { RosterModel, Service } from "./types"; // adjust path if needed
 
-const PROVIDERS_URL = "/api/gdfkzjgujjaz/providers/";
-const ROSTER_TODAY_URL = "/api/gdfkzjgujjaz/roster/today/";
-const ROSTER_TOMORROW_URL = "/api/gdfkzjgujjaz/roster/tomorrow/";
+const PROVIDERS_URL = "/api/providers/";
+const ROSTER_TODAY_URL = "/api/roster/today/";
+const ROSTER_TOMORROW_URL = "/api/roster/tomorrow/";
 
 type ApiRosterEntry = {
   provider_id: number;

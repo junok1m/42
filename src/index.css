@@ -7,7 +7,7 @@
 
 @layer base {
   body {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
     @apply text-[#e9dcb5] bg-[#0b0b0b];
   }
 
@@ -16,10 +16,13 @@
     @apply text-[#e8d6a8];
   }
 
+  /* ❌ 이 블록 삭제
   p, span, li {
     font-family: 'Cormorant Garamond', serif;
   }
+  */
 }
+
 
 
 @layer utilities {
@@ -71,6 +74,28 @@
 @keyframes goldGlow {
   0%, 100% { box-shadow: 0 0 6px rgba(191, 166, 99, 0.6); }
   50% { box-shadow: 0 0 14px rgba(191, 166, 99, 0.95); }
+}
+@keyframes newGlow {
+  0% {
+    box-shadow: 0 0 6px rgba(214, 122, 122, 0.6);
+  }
+  50% {
+    box-shadow: 0 0 14px rgba(214, 122, 122, 0.9);
+  }
+  100% {
+    box-shadow: 0 0 6px rgba(214, 122, 122, 0.6);
+  }
+}
+@keyframes phoneGlow {
+  0% {
+    text-shadow: 0 0 6px rgba(181,147,75,0.35);
+  }
+  50% {
+    text-shadow: 0 0 14px rgba(181,147,75,0.7);
+  }
+  100% {
+    text-shadow: 0 0 6px rgba(181,147,75,0.35);
+  }
 }
 
 /* Smooth scrolling */

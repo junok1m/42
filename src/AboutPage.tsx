@@ -113,7 +113,7 @@ const AboutPage: React.FC = () => {
                       <h3 className="text-xl font-serif font-semibold text-[#e8d6a8] uppercase tracking-widest">Phone</h3>
                     </div>
                     <a 
-                      href="tel:+61417888123"
+                      href="tel:+61498100011"
                       className="block w-full text-center
                         bg-[#14120f]/80 hover:bg-[#1a1813]
                         border border-[#bfa663]/50 hover:border-[#bfa663]
@@ -123,7 +123,7 @@ const AboutPage: React.FC = () => {
                         shadow-[0_0_20px_rgba(191,166,99,0.15)]
                         hover:shadow-[0_0_30px_rgba(191,166,99,0.3)]"
                     >
-                      0417 888 123
+                      0498 100 011
                     </a>
                   </div>
 

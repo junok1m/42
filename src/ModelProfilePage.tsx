@@ -103,7 +103,7 @@ interface ModelProfile {
 
 /* ---------------- Config ---------------- */
 
-const PROVIDERS_URL = "/api/gdfkzjgujjaz/providers/";
+const PROVIDERS_URL = "/api/providers/";
 
 /* ---------------- Helpers ---------------- */
 
@@ -605,7 +605,7 @@ const ModelProfilePage: React.FC = () => {
         {/* Sticky Mobile CTA */}
         <div className="lg:hidden fixed bottom-0 left-0 right-0 p-4 bg-[#0b0b0b] border-t border-[#bfa663]/40 shadow-[0_-4px_20px_rgba(191,166,99,0.2)] z-50">
           <a
-            href="tel:+61417888123"
+            href="tel:+61498100011"
             className="w-full flex items-center justify-center gap-3 bg-[#14120f]/80 hover:bg-[#1a1813] border border-[#bfa663]/50 text-[#e8d6a8] font-serif font-bold py-4 px-6 tracking-wide transition-all duration-300 hover:shadow-[0_0_12px_rgba(191,166,99,0.6)]"
           >
             <Phone className="w-5 h-5" />

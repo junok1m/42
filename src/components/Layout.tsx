@@ -119,7 +119,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12">
   <div>
     <h3 className="text-[#d8bf7a] mb-3 tracking-wide uppercase text-base md:text-sm font-serif">Quick Links</h3>
-    <ul className="space-y-3 text-[#a79b7a] font-sans">
+    <ul className="space-y-3 text-[#a79b7a] font-sans text-md">
       {[
         { name: "Homepage", path: "/" },
         { name: "Rate & Service", path: "/rates" },
@@ -136,9 +136,25 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   </div>
   <div>
     <div className="text-[#a79b7a] space-y-2 font-sans text-base">
-      <p className="block">Open daily 10 am until late</p>
-      <p className="block">42 Buffalo Road, Gladesville 2111</p>
-      <p className="block">0498 100 011</p>
+      <p className="block text-sm">Open daily 10 am until late</p>
+      <br></br>
+      <a
+  href="https://www.google.com/maps/dir//42+Buffalo+Road,+Gladesville+NSW/@-33.8175629,151.128669,15z/data=!4m8!4m7!1m0!1m5!1m1!1s0x6b12a59bd179ab0d:0x626e444e472f57b7!2m2!1d151.1233667!2d-33.8191093?entry=ttu&g_ep=EgoyMDI2MDExMy4wIKXMDSoKLDEwMDc5MjA2OUgBUAM%3D"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="block hover:text-[#f3e4b0] transition-colors duration-500"
+>
+  42 Buffalo Road, Gladesville 2111
+</a>
+      <a
+  href="tel:+61498100011"
+  className="block font-sans text-[#f3e4b0]"
+  style={{ animation: "phoneGlow 3.6s ease-in-out infinite" }}
+>
+  0498 100 011
+</a>
+
+
     </div>
   </div>
 </div>

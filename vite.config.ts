@@ -5,12 +5,11 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      "/api": {
-        target: "https://thenightshade.com.au",
-        changeOrigin: true,
-        secure: true,
-        rewrite: (path) => path.replace(/^\/api/, ""),
-      },
-    },
+  "/api": {
+    target: "https://42g.au",
+    changeOrigin: true,
+    secure: true,
+  },
+},
   },
 });

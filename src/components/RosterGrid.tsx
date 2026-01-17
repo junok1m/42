@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import type { RosterModel } from "../types";
 import { Link } from "react-router-dom";
 
@@ -7,8 +7,25 @@ interface RosterGridProps {
   activeTab: "today" | "tomorrow";
 }
 
+function shuffle<T>(array: T[]) {
+  const arr = [...array];
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
 const RosterGrid: React.FC<RosterGridProps> = ({ models, activeTab }) => {
   const safeModels = Array.isArray(models) ? models : [];
+  const orderedModels = useMemo(() => {
+  if (safeModels.length === 0) return [];
+
+  const newOnes = safeModels.filter((m) => m.isNew);
+  const rest = safeModels.filter((m) => !m.isNew);
+
+  return [...newOnes, ...shuffle(rest)];
+}, [safeModels]);
 
   if (safeModels.length === 0) {
     // ✅ 로딩중/빈값일 때 뻥 뚫린 화면 방지 (원하면 지워도 됨)
@@ -23,7 +40,7 @@ const RosterGrid: React.FC<RosterGridProps> = ({ models, activeTab }) => {
     // ✅ 진짜 100vw 풀폭
     <div className="w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw]">
       <div className="grid grid-cols-2 gap-0 sm:gap-5 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 md:gap-8">
-        {safeModels.map((model) => (
+        {orderedModels.map((model) => (
           <Link
             key={model.id}
             to={`/profile/${model.slug}`}
@@ -33,12 +50,12 @@ const RosterGrid: React.FC<RosterGridProps> = ({ models, activeTab }) => {
             {/* NEW badge */}
             {model.isNew && (
               <span
-                className="absolute top-3 right-3 z-20 px-2 py-0.5 text-[10px] font-semibold tracking-wide text-amber-50
-                  bg-gradient-to-br from-[#b64a4a] to-[#802020]
-                  animate-[pulseGlow_3s_ease-in-out_infinite]"
-              >
-                NEW
-              </span>
+  className="absolute top-3 right-3 z-20 px-2 py-0.5 text-[10px] font-semibold tracking-wide text-amber-50
+    bg-gradient-to-br from-[#b64a4a] to-[#802020]"
+  style={{ animation: "newGlow 3.2s ease-in-out infinite" }}
+>
+  NEW
+</span>
             )}
 
             {/* REAL badge */}
