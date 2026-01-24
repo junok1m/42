@@ -3,6 +3,7 @@ import { useSearchParams } from "react-router-dom";
 import type { RosterModel } from "../types/index.ts";
 import RosterFilters from "./RosterFilters";
 import RosterGrid from "./RosterGrid.tsx";
+import { useTranslation } from "react-i18next";
 
 interface RosterProps {
   rosterToday: RosterModel[];
@@ -12,7 +13,7 @@ interface RosterProps {
 
 const Roster: React.FC<RosterProps> = ({ rosterToday, rosterTomorrow, loading = false }) => {
     const [searchParams, setSearchParams] = useSearchParams();
-
+  const { t } = useTranslation();
   const parseCsv = (v: string | null) =>
     (v || "")
       .split(",")
@@ -122,7 +123,7 @@ if (selectedServices.length > 0) {
                   : "text-[#a79b7a] hover:text-[#d8bf7a]"
               }`}
             >
-              Roster&nbsp;Today
+              {t("roster.today")}
             </button>
 
             {activeTab === "today" && (
@@ -140,7 +141,8 @@ if (selectedServices.length > 0) {
       : "text-[#a79b7a] hover:text-[#d8bf7a]"
   }`}
 >
-  Roster&nbsp;Tomorrow
+  {t("roster.tomorrow")}
+
 </button>
 
 
@@ -156,9 +158,12 @@ if (selectedServices.length > 0) {
   <div className="text-center py-8">
     <div className="inline-block bg-[#1a1610]/70 border border-[#bfa663]/30 rounded-lg px-8 py-5 shadow-[0_0_30px_rgba(0,0,0,0.4)]">
       <p className="text-[#e3d19b] text-lg font-serif mb-1">
-        Tomorrow roster releases by&nbsp;<span className="font-bold">7:00 PM</span> (Sydney time)
-      </p>
-      <p className="text-[#a79b7a] text-sm font-sans">Please check back later</p>
+  {t("roster.tomorrowReleaseTitle", { time: "7:00 PM" })}
+</p>
+<p className="text-[#a79b7a] text-sm font-sans">
+  {t("roster.tomorrowReleaseSubtitle")}
+</p>
+
     </div>
   </div>
 )}
@@ -186,8 +191,12 @@ if (selectedServices.length > 0) {
           {/* LOADING beats EMPTY */}
           {loading ? (
             <div className="text-center py-16">
-              <p className="text-[#a79b7a] text-lg mb-2 font-serif">Loading rosters…</p>
-              <p className="text-[#6f674f] text-sm font-sans">Please wait a moment</p>
+              <p className="text-[#a79b7a] text-lg mb-2 font-serif">
+                  {t("roster.loadingTitle")}
+                </p>
+              <p className="text-[#6f674f] text-sm font-sans">
+  {t("roster.loadingSubtitle")}
+                </p>
             </div>
           ) : (
             <>
@@ -197,13 +206,13 @@ if (selectedServices.length > 0) {
               {filteredRoster.length === 0 && (
                 <div className="text-center py-16">
                   <p className="text-[#a79b7a] text-lg mb-6 font-serif">
-                    No models available with the selected filters.
+  {t("roster.emptyTitle")}
                   </p>
                   <button
                     onClick={clearFilters}
                     className="px-6 py-2 border border-[#bfa663]/50 text-[#e8d6a8] font-sans hover:bg-[#bfa663]/10 transition-all"
                   >
-                    Clear Filters
+  {t("roster.clearFilters")}
                   </button>
                 </div>
               )}

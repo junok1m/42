@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from "react";
 import { Filter, X } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 interface RosterFiltersProps {
   allNationalities: string[];
@@ -36,7 +37,33 @@ const RosterFilters: React.FC<RosterFiltersProps> = ({
   activeFilterCount,
   pageText,
 }) => {
+  const { t } = useTranslation();
   const [showFilters, setShowFilters] = useState(false);
+
+  const svcKey = (service: string) => {
+    const raw = (service || "").trim();
+    const lower = raw.toLowerCase();
+
+    // 숫자 서비스: "69", "69 position"
+    if (lower === "69" || lower.includes("69")) return "69";
+
+    // common naming differences
+    if (lower.includes("shower")) return "shower";
+    if (lower.includes("massage")) return "massage";
+    if (lower.includes("gfe")) return "gfe";
+    if (lower.includes("pse")) return "pse";
+    if (lower.includes("double")) return "double";
+    if (lower.includes("filming")) return "filming";
+
+    // direct: "BBBJ", "DFK", "CIM", "Rimming"...
+    return lower.replace(/[^a-z0-9]/g, "");
+  };
+
+  const renderServiceLabel = (service: string) => {
+    const key = svcKey(service);
+    return t(`services.${key}`, { defaultValue: service });
+  };
+
 
   const computedActiveCount = useMemo(
     () => selectedNationalities.length + selectedServices.length,
@@ -55,6 +82,7 @@ const RosterFilters: React.FC<RosterFiltersProps> = ({
     setIsDropdownOpen(false);
     setIsServicesDropdownOpen(false);
   };
+  const isService = (item: string) => allServices.includes(item);
 
   return (
     <div className="w-full">
@@ -69,7 +97,7 @@ const RosterFilters: React.FC<RosterFiltersProps> = ({
                 border border-[#bfa663]/40
                 text-[#e8d6a8] rounded"
             >
-              {item.toUpperCase()}
+              {isService(item) ? renderServiceLabel(item) : item}
               <button
                 onClick={() =>
                   selectedNationalities.includes(item)
@@ -98,7 +126,7 @@ const RosterFilters: React.FC<RosterFiltersProps> = ({
             transition-all"
         >
           <Filter className="w-4 h-4" />
-          FILTERS
+          {t("filter.filters")}
           {count > 0 && (
             <span
               className="ml-1 px-2 py-0.5 text-xs rounded-full
@@ -127,17 +155,15 @@ const RosterFilters: React.FC<RosterFiltersProps> = ({
             shadow-[0_20px_60px_rgba(0,0,0,0.6)]"
         >
           {/* Panel header */}
-          <div className="flex justify-between items-center mb-6">
-            <h3 className="text-[#e8d6a8] tracking-[0.3em] text-sm font-sans">
-              FILTERS
-            </h3>
+          <div className="flex justify-end items-center mb-6">
+
             <button
               onClick={clearFilters}
               className="text-xs tracking-[0.25em]
                 text-[#bfa663]/70 hover:text-[#e8d6a8]
                 transition"
             >
-              CLEAR ALL
+              {t("filter.clear")}
             </button>
           </div>
 
@@ -154,10 +180,9 @@ const RosterFilters: React.FC<RosterFiltersProps> = ({
                     key={nat}
                     onClick={() => toggleNationality(nat)}
                     className={`px-4 py-1.5 text-sm tracking-wide border transition-all
-                      ${
-                        active
-  ? "bg-[#bfa663]/20 border-[#bfa663] text-[#f1e3b8] shadow-[0_0_12px_rgba(191,166,99,0.45)]"
-  : "bg-[#14120f]/60 border-[#bfa663]/30 text-[#cfc09a] hover:border-[#d9c07c] hover:text-[#f1e3b8]"
+                      ${active
+                        ? "bg-[#bfa663]/20 border-[#bfa663] text-[#f1e3b8] shadow-[0_0_12px_rgba(191,166,99,0.45)]"
+                        : "bg-[#14120f]/60 border-[#bfa663]/30 text-[#cfc09a] hover:border-[#d9c07c] hover:text-[#f1e3b8]"
 
                       }`}
                   >
@@ -178,16 +203,15 @@ const RosterFilters: React.FC<RosterFiltersProps> = ({
                 const active = selectedServices.includes(service);
                 return (
                   <button
-                    key={service}
+                    key={renderServiceLabel(service)}
                     onClick={() => toggleService(service)}
                     className={`px-4 py-1.5 text-sm tracking-wide border transition-all
-                      ${
-                        active
-                          ? "bg-[#bfa663]/20 border-[#bfa663] text-[#f1e3b8]"
-                          : "bg-[#14120f]/60 border-[#bfa663]/30 text-[#cfc09a] hover:border-[#d9c07c] hover:text-[#f1e3b8]"
+                      ${active
+                        ? "bg-[#bfa663]/20 border-[#bfa663] text-[#f1e3b8]"
+                        : "bg-[#14120f]/60 border-[#bfa663]/30 text-[#cfc09a] hover:border-[#d9c07c] hover:text-[#f1e3b8]"
                       }`}
                   >
-                    {service}
+                    {renderServiceLabel(service)}
                   </button>
                 );
               })}

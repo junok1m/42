@@ -65,22 +65,23 @@ function hasAnyRealPhoto(p: ApiProvider): boolean {
 
 function servicesFromProvider(p: ApiProvider): Service[] {
   const flags: Array<[string, boolean | undefined]> = [
-    ["BBBJ", p.service_bbbj],
-    ["CIM", p.service_cim],
-    ["DFK", p.service_dfk],
+    ["bbbj", p.service_bbbj],
+    ["cim", p.service_cim],
+    ["dfk", p.service_dfk],
     ["69", p.service_69],
-    ["Rimming", p.service_rimming],
-    ["Filming", p.service_filming],
-    ["CBJ", p.service_cbj],
-    ["Massage", p.service_massage],
-    ["GFE", p.service_gfe],
-    ["PSE", p.service_pse],
-    ["Double", p.service_double],
-    ["Shower Together", p.service_shower],
+    ["rimming", p.service_rimming],
+    ["filming", p.service_filming],
+    ["cbj", p.service_cbj],
+    ["massage", p.service_massage],
+    ["gfe", p.service_gfe],
+    ["pse", p.service_pse],
+    ["double", p.service_double],
+    ["shower", p.service_shower],
   ];
 
   return flags.map(([name, v]) => ({ name, available: v === true }));
 }
+
 
 function formatTimeLabel(hhmmss: string) {
   const [hhStr, mmStr] = hhmmss.split(":");

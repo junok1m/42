@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Menu, X, Phone } from "lucide-react";
 import { Link } from 'react-router-dom';
+import i18n from "i18next";
+import { useTranslation } from "react-i18next";
 
 
 interface LayoutProps {
@@ -9,6 +11,12 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { t, i18n: i18nInstance } = useTranslation();
+
+  const setLang = (lng: "en" | "zh-CN") => {
+  i18n.changeLanguage(lng);
+  localStorage.setItem("lang", lng);
+  };
 
   return (
     <div className="min-h-screen relative bg-[#0b0b0b] text-[#e8d6a8] font-sans overflow-x-hidden">
@@ -47,16 +55,16 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     {/* Desktop menu */}
     <div className="hidden md:flex items-center space-x-10 text-[#d4c48e]/90 font-light tracking-wide">
       {[
-        ["Rate & Service", "/rates"],
-        ["Roster", "/#roster"],
-        ["Contact", "/contact"],
-      ].map(([label, href]) => (
+  ["menu.rateService", "/rates"],
+  ["menu.roster", "/#roster"],
+  ["menu.contact", "/contact"],
+].map(([labelKey, href]) => (
         <Link
-          key={label}
+          key={href}
           to={href}
           className="relative group font-serif hover:text-[#f3e4b0] transition-all duration-500"
         >
-          {label}
+          {t(labelKey)}
           <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-[#c3a45c] group-hover:w-full transition-all duration-700 ease-in-out"></span>
         </Link>
       ))}
@@ -72,8 +80,27 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                    transition-all duration-500 flex items-center gap-2 font-serif text-lg md:text-base"
       >
         <Phone className="w-4 h-4" />
-        Book Now
+        {t("common.bookNow")}
       </Link>
+{/* Language toggle (desktop + mobile) */}
+<div className="hidden md:flex items-center gap-2">
+  <button
+    onClick={() => setLang("en")}
+    className={`px-2 py-1 text-xs border font-serif tracking-widest ${
+      i18nInstance.language === "en" ? "border-[#d8bf7a]" : "border-[#b5934b]/40"
+    } text-[#d6c59b] hover:text-[#f3e4b0] transition-colors`}
+  >
+    EN
+  </button>
+  <button
+    onClick={() => setLang("zh-CN")}
+    className={`px-2 py-1 text-xs border font-serif tracking-widest ${
+      i18nInstance.language === "zh-CN" ? "border-[#d8bf7a]" : "border-[#b5934b]/40"
+    } text-[#d6c59b] hover:text-[#f3e4b0] transition-colors`}
+  >
+    中文
+  </button>
+</div>
 
       {/* Mobile toggle */}
       <button
@@ -87,25 +114,54 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
   {/* Mobile dropdown (no book now inside anymore) */}
   {isMobileMenuOpen && (
-    <div className="md:hidden bg-black/90 border-t border-[#c3a45c]/30">
-      <div className="text-2xl px-10 py-4 space-y-4 font-light text-[#e7d9b2] font-serif">
-        {[
-          ["Rate & Service", "/rates"],
-          ["Roster", "/#roster"],
-          ["Contact", "/contact"],
-        ].map(([label, href]) => (
-          <Link
-            key={label}
-            to={href}
-            className="block py-2 border-b border-[#b5934b]/10 hover:text-[#f3e4b0]"
-            onClick={() => setIsMobileMenuOpen(false)}
-          >
-            {label}
-          </Link>
-        ))}
-      </div>
+  <div className="md:hidden bg-black/90 border-t border-[#c3a45c]/30">
+
+    {/* 🌍 Language toggle (ABOVE links) */}
+    <div className="flex gap-2 px-10 pt-4 pb-2">
+      <button
+        onClick={() => setLang("en")}
+        className={`px-3 py-2 text-sm border font-serif ${
+          i18nInstance.language === "en"
+            ? "border-[#d8bf7a]"
+            : "border-[#b5934b]/30"
+        }`}
+      >
+        EN
+      </button>
+      <button
+        onClick={() => setLang("zh-CN")}
+        className={`px-3 py-2 text-sm border font-serif ${
+          i18nInstance.language === "zh-CN"
+            ? "border-[#d8bf7a]"
+            : "border-[#b5934b]/30"
+        }`}
+      >
+        中文
+      </button>
     </div>
-  )}
+
+    {/* 🔗 Navigation links */}
+    <div className="text-2xl px-10 py-4 space-y-4 font-light text-[#e7d9b2] font-serif">
+      {[
+  ["menu.rateService", "/rates"],
+  ["menu.roster", "/#roster"],
+  ["menu.contact", "/contact"],
+].map(([labelKey, href]) => (
+  <Link
+    key={href}
+    to={href}
+    className="block py-2 border-b border-[#b5934b]/10 hover:text-[#f3e4b0]"
+    onClick={() => setIsMobileMenuOpen(false)}
+  >
+    {t(labelKey)}
+  </Link>
+))}
+
+    </div>
+
+  </div>
+)}
+
 </nav>
 
 
@@ -121,17 +177,18 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     <h3 className="text-[#d8bf7a] mb-3 tracking-wide uppercase text-base md:text-sm font-serif">Quick Links</h3>
     <ul className="space-y-3 text-[#a79b7a] font-sans text-md">
       {[
-        { name: "Homepage", path: "/" },
-        { name: "Rate & Service", path: "/rates" },
-        { name: "Roster", path: "/#roster" },
-        { name: "Contact", path: "/contact" }
-      ].map((link) => (
-        <li key={link.name}>
-          <Link to={link.path} className="text-base hover:text-[#f3e4b0] transition-colors duration-500">
-            {link.name}
-          </Link>
-        </li>
-      ))}
+  { key: "menu.homepage", path: "/" },
+  { key: "menu.rateService", path: "/rates" },
+  { key: "menu.roster", path: "/#roster" },
+  { key: "menu.contact", path: "/contact" },
+].map((link) => (
+  <li key={link.path}>
+    <Link to={link.path} className="text-base hover:text-[#f3e4b0] transition-colors duration-500">
+      {t(link.key)}
+    </Link>
+  </li>
+))}
+
     </ul>
   </div>
   <div>
