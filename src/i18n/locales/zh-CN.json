@@ -12,7 +12,7 @@
         "loadingSubtitle": "请稍等",
         "tomorrowReleaseTitle": "明日排班将于{{time}}发布（悉尼时间）",
         "tomorrowReleaseSubtitle": "请稍后再来查看",
-        "emptyTitle": "没有符合筛选条件的女生"
+        "emptyTitle": "当前时间或筛选条件下暂无可选女生，请尝试切换时间或清除筛选条件。"
     },
     "common": {
         "loading": "加载中…",
@@ -21,10 +21,13 @@
         "bookNow": "立即预约"
     },
     "filter": {
-    "filters": "筛选",
-    "nationality": "国籍",
-    "clear": "清除筛选"
-  },
+        "filters": "筛选",
+        "nationality": "国籍",
+        "clear": "清除筛选",
+        "onNow": "正在上班",
+        "startLater": "稍后上班",
+        "finished": "已下班"
+    },
     "badges": {
         "realPhoto": "真实照片",
         "new": "新女孩"

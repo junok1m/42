@@ -4,6 +4,9 @@ export interface Model {
   nationality: string;
   image: string;        // thumbnail
   profileLink: string;
+  workingTime?: string;
+  startTime?: string;
+  endTime?: string;
   slug: string;
 }
 

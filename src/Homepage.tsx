@@ -29,7 +29,7 @@ type ApiProvider = {
   images?: ApiProviderImage[];
   is_new?: boolean;
 
-  // ✅ service flags (from your provider API)
+  // ✅ service flags
   service_bbbj?: boolean;
   service_cim?: boolean;
   service_dfk?: boolean;
@@ -47,11 +47,9 @@ type ApiProvider = {
 function pickThumbnailFromProvider(p: ApiProvider): string {
   const imgs = (p.images || []).filter((x) => x?.image);
 
-  // 1) profile:true wins
   const profileImg = imgs.find((x) => x.profile === true)?.image;
   if (profileImg) return profileImg;
 
-  // 2) fallback to highest priority
   const best = imgs
     .slice()
     .sort((a, b) => (b.priority ?? 0) - (a.priority ?? 0))[0]?.image;
@@ -81,7 +79,6 @@ function servicesFromProvider(p: ApiProvider): Service[] {
 
   return flags.map(([name, v]) => ({ name, available: v === true }));
 }
-
 
 function formatTimeLabel(hhmmss: string) {
   const [hhStr, mmStr] = hhmmss.split(":");
@@ -169,6 +166,10 @@ const Homepage = () => {
           image: pickThumbnailFromProvider(p),
           profileLink: `/profile/${p.slug}`,
 
+          // ✅ IMPORTANT: needed for time filter
+          startTime: entry.start_time,
+          endTime: entry.end_time,
+
           workingTime: formatWorkingTime(entry.start_time, entry.end_time),
           isNew: p.is_new === true,
           isRealPhoto: hasAnyRealPhoto(p),
@@ -181,7 +182,7 @@ const Homepage = () => {
   const rosterTomorrow: RosterModel[] = useMemo(() => {
     return apiTomorrow
       .map((entry) => {
-      const p = providerById.get(entry.provider_id);
+        const p = providerById.get(entry.provider_id);
         if (!p) return null;
 
         return {
@@ -191,6 +192,10 @@ const Homepage = () => {
           nationality: p.country || "Unknown",
           image: pickThumbnailFromProvider(p),
           profileLink: `/profile/${p.slug}`,
+
+          // ✅ IMPORTANT: needed for time filter
+          startTime: entry.start_time,
+          endTime: entry.end_time,
 
           workingTime: formatWorkingTime(entry.start_time, entry.end_time),
           isNew: p.is_new === true,
@@ -203,7 +208,6 @@ const Homepage = () => {
 
   return (
     <Layout>
-
       {apiError && (
         <div className="mx-6 mt-6 p-3 border border-red-500/40 bg-red-900/20 text-red-300 text-sm">
           API error: {apiError}
