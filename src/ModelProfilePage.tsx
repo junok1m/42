@@ -13,7 +13,6 @@ type ApiProviderImage = {
   file_type?: string;
   profile?: boolean;
   priority?: number;
-  real?: boolean;
 };
 
 type ApiProvider = {
@@ -75,7 +74,6 @@ interface ModelProfile {
 
   // badges
   isNew: boolean;
-  isRealPhoto: boolean;
 
   // details
   cup?: string;
@@ -133,9 +131,7 @@ function allImages(p: ApiProvider): string[] {
 }
 
 
-function hasAnyRealPhoto(p: ApiProvider): boolean {
-  return (p.images || []).some((img) => img.real === true);
-}
+
 
 function servicesFromProvider(p: ApiProvider): Service[] {
   const flags: Array<[string, boolean | undefined]> = [
@@ -223,7 +219,6 @@ const ModelProfilePage: React.FC = () => {
           profileImage: hero,
 
           isNew: p.is_new === true,
-          isRealPhoto: hasAnyRealPhoto(p),
 
           cup: normalizeOptionalText(p.cup),
           height: typeof p.height === "number" ? p.height : undefined,
@@ -357,20 +352,7 @@ const ModelProfilePage: React.FC = () => {
                   </div>
                 )}
 
-                {/* REAL badge – gold / premium */}
-                {model.isRealPhoto && (
-                  <span className="absolute top-3 left-3 
-  text-[11px] uppercase tracking-[0.25em] 
-  text-[#e8d6a8]
-  px-2.5 py-1 
-  border border-[#bfa663]/50 
-  bg-[#14120f]/70 
-  backdrop-blur-sm
-  font-serif">
-                    {t("badges.realPhoto")}
 
-                  </span>
-                )}
 
                 {/* NEW badge – subtle / secondary */}
                 {model.isNew && (
@@ -571,28 +553,40 @@ const ModelProfilePage: React.FC = () => {
 
                 </h2>
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                  {model.services.map((service) => (
-                    <div
-                      key={service.name}
-                      className={`flex items-center gap-2 p-3 border transition-all ${service.available
-                        ? "bg-[#0f1b0f]/60 border-[#90ff90]/40 text-[#b8ffb8]"
-                        : "bg-[#0b0b0b]/40 border-[#bfa663]/20 text-[#a4976c]/60"
-                        }`}
-                    >
-                      {service.available ? (
-                        <Check className="w-4 h-4 text-[#90ff90] flex-shrink-0" />
-                      ) : (
-                        <X className="w-4 h-4 text-[#a4976c]/60 flex-shrink-0" />
-                      )}
-                      <span
-                        className={`text-lg font-serif uppercase tracking-wider ${service.available ? "" : "line-through"
-                          }`}
-                      >
-                        {t(`services.${service.name}`)}
-                      </span>
-                    </div>
-                  ))}
-                </div>
+  {model.services.map((service) => {
+    const available = service.available;
+
+    return (
+      <div
+        key={service.name}
+        className={`
+          flex items-center gap-2 p-3 border transition-all
+          ${
+            available
+              ? "bg-[#14120f]/70 border-[#bfa663]/50 text-[#e8d6a8] shadow-[inset_0_0_18px_rgba(191,166,99,0.18)]"
+              : "bg-[#0b0b0b]/40 border-[#bfa663]/15 text-[#8f8462]"
+          }
+        `}
+      >
+        {available ? (
+          <Check className="w-4 h-4 text-[#bfa663] flex-shrink-0" />
+        ) : (
+          <X className="w-4 h-4 text-[#7a7055] flex-shrink-0" />
+        )}
+
+        <span
+          className={`
+            text-lg font-serif uppercase tracking-wider
+            ${available ? "" : "opacity-60"}
+          `}
+        >
+          {t(`services.${service.name}`)}
+        </span>
+      </div>
+    );
+  })}
+</div>
+
               </div>
 
               {/* Optional: description HTML block (if you want to show it) */}
