@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 
 /* ---------------- Time helpers (date-anchored, no ambiguity) ---------------- */
 
-type ShiftStatus = "now" | "later" | "finished";
+type ShiftStatus = "now" | "today";
 
 function parseHHMMSS(hhmmss: string): { hh: number; mm: number; ss: number } {
   const [hhStr, mmStr, ssStr] = (hhmmss || "0:0:0").split(":");
@@ -58,10 +58,16 @@ function getShiftStatusOnDay(
 
   // interpret end=00:00:00 as 24:00 of the same day (unless start is also 00:00:00)
   const endParts = parseHHMMSS(endHHMMSS);
-  const isMidnight = endParts.hh === 0 && endParts.mm === 0 && endParts.ss === 0;
+  const isMidnight =
+    endParts.hh === 0 && endParts.mm === 0 && endParts.ss === 0;
   let endAt = makeDateOnDay(day0, endHHMMSS);
 
-  if (isMidnight && (startAt.getHours() !== 0 || startAt.getMinutes() !== 0 || startAt.getSeconds() !== 0)) {
+  if (
+    isMidnight &&
+    (startAt.getHours() !== 0 ||
+      startAt.getMinutes() !== 0 ||
+      startAt.getSeconds() !== 0)
+  ) {
     endAt = addDays(day0, 1); // 24:00
   }
 
@@ -70,9 +76,10 @@ function getShiftStatusOnDay(
     endAt = addDays(endAt, 1);
   }
 
-  if (now.getTime() >= startAt.getTime() && now.getTime() < endAt.getTime()) return "now";
-  if (now.getTime() < startAt.getTime()) return "later";
-  return "finished";
+  if (now.getTime() >= startAt.getTime() && now.getTime() < endAt.getTime())
+  return "now";
+return "today";
+
 }
 
 /* ---------------- Component ---------------- */
@@ -83,7 +90,11 @@ interface RosterProps {
   loading?: boolean;
 }
 
-const Roster: React.FC<RosterProps> = ({ rosterToday, rosterTomorrow, loading = false }) => {
+const Roster: React.FC<RosterProps> = ({
+  rosterToday,
+  rosterTomorrow,
+  loading = false,
+}) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const { t } = useTranslation();
 
@@ -96,18 +107,25 @@ const Roster: React.FC<RosterProps> = ({ rosterToday, rosterTomorrow, loading = 
   const readTab = (v: string | null): "today" | "tomorrow" =>
     v === "tomorrow" ? "tomorrow" : "today";
 
-  const readTime = (v: string | null): "now" | "later" | "finished" =>
-    v === "later" ? "later" : v === "finished" ? "finished" : "now";
+  const readTime = (v: string | null): ShiftStatus =>
+    v === "today" ? "today" : "now";
 
   const initialTab = readTab(searchParams.get("tab"));
   const initialTime = readTime(searchParams.get("time"));
   const initialNats = parseCsv(searchParams.get("nat"));
   const initialSvcs = parseCsv(searchParams.get("svc"));
 
-  const [activeTab, setActiveTab] = useState<"today" | "tomorrow">(() => initialTab);
-  const [time, setTime] = useState<"now" | "later" | "finished">(() => initialTime);
-  const [selectedNationalities, setSelectedNationalities] = useState<string[]>(() => initialNats);
-  const [selectedServices, setSelectedServices] = useState<string[]>(() => initialSvcs);
+  const [activeTab, setActiveTab] = useState<"today" | "tomorrow">(
+    () => initialTab
+  );
+  const [time, setTime] = useState<ShiftStatus>(() => initialTime);
+
+  const [selectedNationalities, setSelectedNationalities] = useState<string[]>(
+    () => initialNats
+  );
+  const [selectedServices, setSelectedServices] = useState<string[]>(
+    () => initialSvcs
+  );
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isServicesDropdownOpen, setIsServicesDropdownOpen] = useState(false);
@@ -119,7 +137,8 @@ const Roster: React.FC<RosterProps> = ({ rosterToday, rosterTomorrow, loading = 
     next.set("tab", activeTab);
     next.set("time", time);
 
-    if (selectedNationalities.length) next.set("nat", selectedNationalities.join(","));
+    if (selectedNationalities.length)
+      next.set("nat", selectedNationalities.join(","));
     else next.delete("nat");
 
     if (selectedServices.length) next.set("svc", selectedServices.join(","));
@@ -128,7 +147,14 @@ const Roster: React.FC<RosterProps> = ({ rosterToday, rosterTomorrow, loading = 
     if (next.toString() !== searchParams.toString()) {
       setSearchParams(next, { replace: true });
     }
-  }, [activeTab, time, selectedNationalities, selectedServices, searchParams, setSearchParams]);
+  }, [
+    activeTab,
+    time,
+    selectedNationalities,
+    selectedServices,
+    searchParams,
+    setSearchParams,
+  ]);
 
   // If tomorrow API returns empty array (common before 7pm), show message
   const showTomorrowReleaseMsg =
@@ -140,21 +166,22 @@ const Roster: React.FC<RosterProps> = ({ rosterToday, rosterTomorrow, loading = 
 
   // anchor day for time comparison (today tab => today, tomorrow tab => tomorrow)
   // Shop "business day" starts at 10:00 (10am) and runs until 03:00 next day.
-// So between 00:00–09:59, "today" tab should still anchor to yesterday.
-const SHOP_DAY_START_HOUR = 10;
+  // So between 00:00–09:59, "today" tab should still anchor to yesterday.
+  const SHOP_DAY_START_HOUR = 10;
 
-const rosterDay = useMemo(() => {
-  const now = new Date();
-  const calendarToday = startOfDay(now);
+  const rosterDay = useMemo(() => {
+    const now = new Date();
+    const calendarToday = startOfDay(now);
 
-  // If it's before shop opening (e.g. 12:41am), we are still in "yesterday's" roster day.
-  const shopToday =
-    now.getHours() < SHOP_DAY_START_HOUR ? addDays(calendarToday, -1) : calendarToday;
+    // If it's before shop opening (e.g. 12:41am), we are still in "yesterday's" roster day.
+    const shopToday =
+      now.getHours() < SHOP_DAY_START_HOUR
+        ? addDays(calendarToday, -1)
+        : calendarToday;
 
-  // today tab => shopToday, tomorrow tab => shopToday + 1
-  return activeTab === "tomorrow" ? addDays(shopToday, 1) : shopToday;
-}, [activeTab]);
-
+    // today tab => shopToday, tomorrow tab => shopToday + 1
+    return activeTab === "tomorrow" ? addDays(shopToday, 1) : shopToday;
+  }, [activeTab]);
 
   const allNationalities = useMemo(
     () => [...new Set(currentRoster.map((m) => m.nationality))].sort(),
@@ -165,7 +192,9 @@ const rosterDay = useMemo(() => {
     return [
       ...new Set(
         currentRoster
-          .flatMap((m) => (m.services || []).filter((s) => s.available).map((s) => s.name))
+          .flatMap((m) =>
+            (m.services || []).filter((s) => s.available).map((s) => s.name)
+          )
           .filter(Boolean)
       ),
     ].sort();
@@ -175,18 +204,24 @@ const rosterDay = useMemo(() => {
     let filtered = currentRoster;
 
     // ✅ TIME FILTER (needs startTime/endTime)
-    filtered = filtered.filter((m) => {
-      const start = (m as any).startTime as string | undefined;
-      const end = (m as any).endTime as string | undefined;
+filtered = filtered.filter((m) => {
+  // today = no time filtering (show entire roster for that rosterDay)
+  if (time === "today") return true;
 
-      // If missing, do NOT lie. Just include everyone (so the UI doesn’t look broken).
-      if (!start || !end) return true;
+  const start = (m as any).startTime as string | undefined;
+  const end = (m as any).endTime as string | undefined;
 
-      return getShiftStatusOnDay(start, end, rosterDay) === time;
-    });
+  // If missing, do NOT lie. Just include everyone.
+  if (!start || !end) return true;
+
+  return getShiftStatusOnDay(start, end, rosterDay) === "now";
+});
+
 
     if (selectedNationalities.length > 0) {
-      filtered = filtered.filter((m) => selectedNationalities.includes(m.nationality));
+      filtered = filtered.filter((m) =>
+        selectedNationalities.includes(m.nationality)
+      );
     }
 
     if (selectedServices.length > 0) {
@@ -203,10 +238,14 @@ const rosterDay = useMemo(() => {
   }, [currentRoster, rosterDay, time, selectedNationalities, selectedServices]);
 
   const toggleNationality = (n: string) =>
-    setSelectedNationalities((prev) => (prev.includes(n) ? prev.filter((x) => x !== n) : [...prev, n]));
+    setSelectedNationalities((prev) =>
+      prev.includes(n) ? prev.filter((x) => x !== n) : [...prev, n]
+    );
 
   const toggleService = (s: string) =>
-    setSelectedServices((prev) => (prev.includes(s) ? prev.filter((x) => x !== s) : [...prev, s]));
+    setSelectedServices((prev) =>
+      prev.includes(s) ? prev.filter((x) => x !== s) : [...prev, s]
+    );
 
   const clearFilters = () => {
     setSelectedNationalities([]);
@@ -214,7 +253,10 @@ const rosterDay = useMemo(() => {
   };
 
   return (
-    <section id="roster" className="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-[#e8d6a8]">
+    <section
+      id="roster"
+      className="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-[#e8d6a8]"
+    >
       {/* Header */}
       <div className="flex flex-col items-center mb-10 px-3">
         <div className="flex justify-center items-center gap-6 sm:gap-10 md:gap-16 flex-nowrap text-center w-full max-w-[420px]">
@@ -263,7 +305,9 @@ const rosterDay = useMemo(() => {
             <p className="text-[#e3d19b] text-lg font-serif mb-1">
               {t("roster.tomorrowReleaseTitle", { time: "7:00 PM" })}
             </p>
-            <p className="text-[#a79b7a] text-sm font-sans">{t("roster.tomorrowReleaseSubtitle")}</p>
+            <p className="text-[#a79b7a] text-sm font-sans">
+              {t("roster.tomorrowReleaseSubtitle")}
+            </p>
           </div>
         </div>
       )}
@@ -293,8 +337,12 @@ const rosterDay = useMemo(() => {
 
         {loading ? (
           <div className="text-center py-16">
-            <p className="text-[#a79b7a] text-lg mb-2 font-serif">{t("roster.loadingTitle")}</p>
-            <p className="text-[#6f674f] text-sm font-sans">{t("roster.loadingSubtitle")}</p>
+            <p className="text-[#a79b7a] text-lg mb-2 font-serif">
+              {t("roster.loadingTitle")}
+            </p>
+            <p className="text-[#6f674f] text-sm font-sans">
+              {t("roster.loadingSubtitle")}
+            </p>
           </div>
         ) : (
           <>
@@ -302,7 +350,9 @@ const rosterDay = useMemo(() => {
 
             {filteredRoster.length === 0 && (
               <div className="text-center py-16">
-                <p className="text-[#a79b7a] text-lg mb-6 font-serif">{t("roster.emptyTitle")}</p>
+                <p className="text-[#a79b7a] text-lg mb-6 font-serif">
+                  {t("roster.emptyTitle")}
+                </p>
                 <button
                   onClick={clearFilters}
                   className="px-6 py-2 border border-[#bfa663]/50 text-[#e8d6a8] font-sans hover:bg-[#bfa663]/10 transition-all"

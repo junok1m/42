@@ -3,10 +3,9 @@ import React, { useMemo, useState } from "react";
 import { Filter, X, Clock } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
-type ShiftStatus = "now" | "later" | "finished";
+type ShiftStatus = "now" | "today";
 
 interface RosterFiltersProps {
-  // ✅ (1) time props
   time: ShiftStatus;
   setTime: (t: ShiftStatus) => void;
 
@@ -49,7 +48,7 @@ const RosterFilters: React.FC<RosterFiltersProps> = ({
   const { t } = useTranslation();
   const [showFilters, setShowFilters] = useState(false);
 
-  // ✅ service label mapper (existing)
+  // service label mapper
   const svcKey = (service: string) => {
     const raw = (service || "").trim();
     const lower = raw.toLowerCase();
@@ -70,14 +69,12 @@ const RosterFilters: React.FC<RosterFiltersProps> = ({
     return t(`services.${key}`, { defaultValue: service });
   };
 
-  // ✅ (1) Fix dependency bug: depend on arrays, not length only
   const computedActiveCount = useMemo(() => {
     return selectedNationalities.length + selectedServices.length;
   }, [selectedNationalities, selectedServices]);
 
   const count = activeFilterCount ?? computedActiveCount;
 
-  // ✅ (4) Clear = reset nat/svc AND time
   const clearFilters = () => {
     setSelectedNationalities([]);
     setSelectedServices([]);
@@ -92,27 +89,15 @@ const RosterFilters: React.FC<RosterFiltersProps> = ({
 
   const isService = (item: string) => allServices.includes(item);
 
-  // ✅ (3) Better time label + subtle glow by state
-  const timeLabel =
-    time === "now"
-      ? t("filter.onNow")
-      : time === "later"
-      ? t("filter.startLater")
-      : t("filter.finished");
+  const timeLabel = time === "now" ? t("filter.onNow") : t("filter.seeAll");
 
   const timeGlow =
     time === "now"
       ? "shadow-[0_0_14px_rgba(191,166,99,0.38)]"
-      : time === "later"
-      ? "shadow-[0_0_14px_rgba(217,192,124,0.26)]"
-      : "opacity-90";
+      : "shadow-[0_0_14px_rgba(217,192,124,0.18)]";
 
   const cycleTime = () => {
-    const order: ShiftStatus[] = ["now", "later", "finished"];
-    const idx = order.indexOf(time);
-    const next = order[(idx + 1) % order.length];
-
-    // ✅ (5) close panel when changing time (so result feels immediate / less clutter)
+    const next: ShiftStatus = time === "now" ? "today" : "now";
     setTime(next);
     setShowFilters(false);
     setIsDropdownOpen(false);
@@ -175,7 +160,7 @@ const RosterFilters: React.FC<RosterFiltersProps> = ({
             )}
           </button>
 
-          {/* ✅ (2)(3)(6) Time filter button (i18n keys + safe UI) */}
+          {/* Time toggle */}
           <button
             onClick={cycleTime}
             className={`flex items-center gap-2 px-5 py-2.5
@@ -255,7 +240,6 @@ const RosterFilters: React.FC<RosterFiltersProps> = ({
                 const active = selectedServices.includes(service);
                 return (
                   <button
-                    // ✅ (2) stable key: never use translated string for key
                     key={service}
                     onClick={() => toggleService(service)}
                     className={`px-4 py-1.5 text-sm tracking-wide border transition-all

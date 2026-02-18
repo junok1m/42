@@ -30,8 +30,7 @@
     "nationality": "Nationality",
     "clear": "Clear",
     "onNow": "On Now",
-    "startLater": "Starting Later",
-    "finished": "Finished"
+    "seeAll": "View All"
   },
   "rates": {
     "min30": "30 Min",

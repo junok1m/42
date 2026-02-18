@@ -49,7 +49,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                  bg-gradient-to-r from-[#d8bf7a] to-[#b5934b] drop-shadow-[0_1px_6px_rgba(255,215,140,0.2)]
                  hover:brightness-125 transition duration-500"
     >
-      The Nightshade
+      42G.au
     </Link>
 
     {/* Desktop menu */}

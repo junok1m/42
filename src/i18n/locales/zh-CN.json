@@ -26,8 +26,7 @@
         "nationality": "国籍",
         "clear": "清除筛选",
         "onNow": "正在上班",
-        "startLater": "稍后上班",
-        "finished": "已下班"
+        "seeAll": "查看全部"
     },
     "badges": {
         "realPhoto": "真实照片",
