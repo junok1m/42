@@ -57,8 +57,11 @@ const RosterGrid: React.FC<RosterGridProps> = ({ models, activeTab }) => {
     return shuffled;
   }, [safeModels, shuffleKey]);
 
-  if (safeModels.length === 0) {
+  if (models == null) {
     return <div className="text-center text-[#c9c2a2] py-10">Loading roster...</div>;
+  }
+  if (Array.isArray(models) && models.length === 0) {
+    return <div className="text-center text-[#c9c2a2] py-10">No one on roster.</div>;
   }
 
   return (

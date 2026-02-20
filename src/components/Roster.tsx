@@ -77,9 +77,8 @@ function getShiftStatusOnDay(
   }
 
   if (now.getTime() >= startAt.getTime() && now.getTime() < endAt.getTime())
-  return "now";
-return "today";
-
+    return "now";
+  return "today";
 }
 
 /* ---------------- Component ---------------- */
@@ -107,8 +106,12 @@ const Roster: React.FC<RosterProps> = ({
   const readTab = (v: string | null): "today" | "tomorrow" =>
     v === "tomorrow" ? "tomorrow" : "today";
 
-  const readTime = (v: string | null): ShiftStatus =>
-    v === "today" ? "today" : "now";
+    const readTime = (v: string | null): ShiftStatus => {
+      if (v == null) return "today";
+      if (v === "today") return "today";
+      if (v === "now") return "now";
+      return "now";
+    };
 
   const initialTab = readTab(searchParams.get("tab"));
   const initialTime = readTime(searchParams.get("time"));
@@ -204,19 +207,18 @@ const Roster: React.FC<RosterProps> = ({
     let filtered = currentRoster;
 
     // ✅ TIME FILTER (needs startTime/endTime)
-filtered = filtered.filter((m) => {
-  // today = no time filtering (show entire roster for that rosterDay)
-  if (time === "today") return true;
+    filtered = filtered.filter((m) => {
+      // today = no time filtering (show entire roster for that rosterDay)
+      if (time === "today") return true;
 
-  const start = (m as any).startTime as string | undefined;
-  const end = (m as any).endTime as string | undefined;
+      const start = (m as any).startTime as string | undefined;
+      const end = (m as any).endTime as string | undefined;
 
-  // If missing, do NOT lie. Just include everyone.
-  if (!start || !end) return true;
+      // If missing, do NOT lie. Just include everyone.
+      if (!start || !end) return true;
 
-  return getShiftStatusOnDay(start, end, rosterDay) === "now";
-});
-
+      return getShiftStatusOnDay(start, end, rosterDay) === "now";
+    });
 
     if (selectedNationalities.length > 0) {
       filtered = filtered.filter((m) =>
