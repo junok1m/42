@@ -106,12 +106,12 @@ const Roster: React.FC<RosterProps> = ({
   const readTab = (v: string | null): "today" | "tomorrow" =>
     v === "tomorrow" ? "tomorrow" : "today";
 
-    const readTime = (v: string | null): ShiftStatus => {
-      if (v == null) return "today";
-      if (v === "today") return "today";
-      if (v === "now") return "now";
-      return "now";
-    };
+  const readTime = (v: string | null): ShiftStatus => {
+    if (v == null) return "today";
+    if (v === "today") return "today";
+    if (v === "now") return "now";
+    return "now";
+  };
 
   const initialTab = readTab(searchParams.get("tab"));
   const initialTime = readTime(searchParams.get("time"));
@@ -266,11 +266,10 @@ const Roster: React.FC<RosterProps> = ({
           <div className="relative flex-1 min-w-[120px]">
             <button
               onClick={() => setActiveTab("today")}
-              className={`font-serif text-xl sm:text-2xl md:text-3xl tracking-wide transition-all w-full relative ${
-                activeTab === "today"
-                  ? "text-transparent bg-clip-text bg-gradient-to-r from-[#e3d19b] to-[#bfa663] font-bold"
-                  : "text-[#a79b7a] hover:text-[#d8bf7a]"
-              }`}
+              className={`font-serif text-3xl sm:text-2xl md:text-3xl tracking-wide transition-all w-full relative ${activeTab === "today"
+                ? "text-transparent bg-clip-text bg-gradient-to-r from-[#e3d19b] to-[#bfa663] font-bold"
+                : "text-[#a79b7a] hover:text-[#d8bf7a]"
+                }`}
             >
               {t("roster.today")}
             </button>
@@ -284,11 +283,10 @@ const Roster: React.FC<RosterProps> = ({
           <div className="relative flex-1 min-w-[120px]">
             <button
               onClick={() => setActiveTab("tomorrow")}
-              className={`font-serif text-xl sm:text-2xl md:text-3xl tracking-wide transition-all w-full relative ${
-                activeTab === "tomorrow"
-                  ? "text-transparent bg-clip-text bg-gradient-to-r from-[#e3d19b] to-[#bfa663] font-bold"
-                  : "text-[#a79b7a] hover:text-[#d8bf7a]"
-              }`}
+              className={`font-serif text-xl sm:text-2xl md:text-3xl tracking-wide transition-all w-full relative ${activeTab === "tomorrow"
+                ? "text-transparent bg-clip-text bg-gradient-to-r from-[#e3d19b] to-[#bfa663] font-bold"
+                : "text-[#a79b7a] hover:text-[#d8bf7a]"
+                }`}
             >
               {t("roster.tomorrow")}
             </button>

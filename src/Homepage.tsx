@@ -1,11 +1,19 @@
 import { useEffect, useMemo, useState } from "react";
 import Layout from "./components/Layout";
 import Roster from "./components/Roster";
-import type { RosterModel, Service } from "./types"; // adjust path if needed
+import type { RosterModel, Service } from "./types";
 
+const NEWS_BASE = "/api/news/";
 const PROVIDERS_URL = "/api/providers/";
 const ROSTER_TODAY_URL = "/api/roster/today/";
 const ROSTER_TOMORROW_URL = "/api/roster/tomorrow/";
+
+type ApiNewsItem = {
+  id: number;
+  title?: string;
+  publish_date?: string;
+  is_public?: boolean;
+};
 
 type ApiRosterEntry = {
   provider_id: number;
@@ -29,7 +37,6 @@ type ApiProvider = {
   images?: ApiProviderImage[];
   is_new?: boolean;
 
-  // ✅ service flags
   service_bbbj?: boolean;
   service_cim?: boolean;
   service_dfk?: boolean;
@@ -100,6 +107,7 @@ const Homepage = () => {
   const [apiToday, setApiToday] = useState<ApiRosterEntry[]>([]);
   const [apiTomorrow, setApiTomorrow] = useState<ApiRosterEntry[]>([]);
   const [apiError, setApiError] = useState<string | null>(null);
+  const [news, setNews] = useState<ApiNewsItem[]>([]);
 
   useEffect(() => {
     let cancelled = false;
@@ -109,10 +117,11 @@ const Homepage = () => {
         setLoading(true);
         setApiError(null);
 
-        const [provRes, todayRes, tomorrowRes] = await Promise.all([
+        const [provRes, todayRes, tomorrowRes, newsRes] = await Promise.all([
           fetch(PROVIDERS_URL),
           fetch(ROSTER_TODAY_URL),
           fetch(ROSTER_TOMORROW_URL),
+          fetch(NEWS_BASE),
         ]);
 
         if (!provRes.ok) throw new Error(`providers fetch failed: ${provRes.status}`);
@@ -123,10 +132,21 @@ const Homepage = () => {
         const todayJson = (await todayRes.json()) as ApiRosterEntry[];
         const tomorrowJson = (await tomorrowRes.json()) as ApiRosterEntry[];
 
+        const newsJson = newsRes.ok
+          ? ((await newsRes.json()) as ApiNewsItem[])
+          : [];
+
         if (!cancelled) {
           setProviders(Array.isArray(provJson) ? provJson : []);
           setApiToday(Array.isArray(todayJson) ? todayJson : []);
           setApiTomorrow(Array.isArray(tomorrowJson) ? tomorrowJson : []);
+
+          setNews(
+            Array.isArray(newsJson)
+              ? newsJson.filter((x) => x.is_public !== false).slice(0, 3)
+              : []
+          );
+
           setLoading(false);
         }
       } catch (e: any) {
@@ -135,12 +155,14 @@ const Homepage = () => {
           setProviders([]);
           setApiToday([]);
           setApiTomorrow([]);
+          setNews([]);
           setLoading(false);
         }
       }
     }
 
     loadAll();
+
     return () => {
       cancelled = true;
     };
@@ -165,11 +187,8 @@ const Homepage = () => {
           nationality: p.country || "Unknown",
           image: pickThumbnailFromProvider(p),
           profileLink: `/profile/${p.slug}`,
-
-          // ✅ IMPORTANT: needed for time filter
           startTime: entry.start_time,
           endTime: entry.end_time,
-
           workingTime: formatWorkingTime(entry.start_time, entry.end_time),
           isNew: p.is_new === true,
           isRealPhoto: hasAnyRealPhoto(p),
@@ -192,11 +211,8 @@ const Homepage = () => {
           nationality: p.country || "Unknown",
           image: pickThumbnailFromProvider(p),
           profileLink: `/profile/${p.slug}`,
-
-          // ✅ IMPORTANT: needed for time filter
           startTime: entry.start_time,
           endTime: entry.end_time,
-
           workingTime: formatWorkingTime(entry.start_time, entry.end_time),
           isNew: p.is_new === true,
           isRealPhoto: hasAnyRealPhoto(p),
@@ -212,6 +228,25 @@ const Homepage = () => {
         <div className="mx-6 mt-6 p-3 border border-red-500/40 bg-red-900/20 text-red-300 text-sm">
           API error: {apiError}
         </div>
+      )}
+
+      {news.length > 0 && (
+        <section className="mx-6 mt-6 mb-0 border border-[#bfa663]/30 bg-[#14120f]/50 p-4">
+          <p className="mb-2 font-serif text-md uppercase tracking-[0.2em] text-[#bfa663]">
+            News
+          </p>
+          <div className="space-y-1">
+            {news.map((item) => (
+  <div
+    key={item.id}
+    className="text-xl text-[#e8d6a8]/90"
+    dangerouslySetInnerHTML={{
+      __html: item.title || "Untitled news",
+    }}
+  />
+))}
+          </div>
+        </section>
       )}
 
       <Roster rosterToday={rosterToday} rosterTomorrow={rosterTomorrow} loading={loading} />
