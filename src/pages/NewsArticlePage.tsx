@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
-import Layout from "./components/Layout";
+import Layout from "../components/Layout";
 
 type ApiNewsMedia = {
   url?: string;

@@ -2,7 +2,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useParams, useLocation, useNavigate } from "react-router-dom";
 import { ChevronLeft, ChevronRight, Phone, Check, X, ArrowLeft } from "lucide-react";
-import Layout from "./components/Layout";
+import Layout from "../components/Layout";
 import { useTranslation } from "react-i18next";
 
 

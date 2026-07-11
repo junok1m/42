@@ -1,6 +1,6 @@
 import React from 'react';
 import { MapPin, Phone, Clock, Briefcase, Navigation } from 'lucide-react';
-import Layout from './components/Layout';
+import Layout from '../components/Layout';
 
 const ContactPage: React.FC = () => {
   return (

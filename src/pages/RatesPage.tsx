@@ -1,6 +1,6 @@
 import React from 'react';
 import { Clock, Info } from 'lucide-react';
-import Layout from './components/Layout';
+import Layout from '../components/Layout';
 
 const RatesPage: React.FC = () => {
   return (
