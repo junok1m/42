@@ -1,253 +1,188 @@
 // src/components/RosterFilters.tsx
-import React, { useMemo, useState } from "react";
-import { Filter, X, Clock } from "lucide-react";
+import { useMemo, useState } from "react";
+import { Clock, Filter, X } from "lucide-react";
 import { useTranslation } from "react-i18next";
-
-type ShiftStatus = "now" | "today";
+import type { ShiftStatus } from "../utils/rosterTime";
 
 interface RosterFiltersProps {
   time: ShiftStatus;
-  setTime: (t: ShiftStatus) => void;
+  onTimeChange: (time: ShiftStatus) => void;
 
   allNationalities: string[];
   allServices: string[];
+
   selectedNationalities: string[];
   selectedServices: string[];
 
-  // keep these so parent doesn't break (unused now)
-  isDropdownOpen: boolean;
-  isServicesDropdownOpen: boolean;
-  setIsDropdownOpen: (open: boolean) => void;
-  setIsServicesDropdownOpen: (open: boolean) => void;
-
-  toggleNationality: (nationality: string) => void;
-  toggleService: (service: string) => void;
-  setSelectedNationalities: (n: string[]) => void;
-  setSelectedServices: (s: string[]) => void;
-
-  activeFilterCount?: number;
-  pageText?: string;
+  onToggleNationality: (nationality: string) => void;
+  onToggleService: (service: string) => void;
+  onClearFilters: () => void;
 }
 
 const RosterFilters: React.FC<RosterFiltersProps> = ({
   time,
-  setTime,
+  onTimeChange,
   allNationalities,
   allServices,
   selectedNationalities,
   selectedServices,
-  setIsDropdownOpen,
-  setIsServicesDropdownOpen,
-  toggleNationality,
-  toggleService,
-  setSelectedNationalities,
-  setSelectedServices,
-  activeFilterCount,
-  pageText,
+  onToggleNationality,
+  onToggleService,
+  onClearFilters,
 }) => {
   const { t } = useTranslation();
   const [showFilters, setShowFilters] = useState(false);
 
-  // service label mapper
-  const svcKey = (service: string) => {
-    const raw = (service || "").trim();
-    const lower = raw.toLowerCase();
+  const activeFilterCount = useMemo(
+    () => selectedNationalities.length + selectedServices.length,
+    [selectedNationalities, selectedServices]
+  );
 
-    if (lower === "69" || lower.includes("69")) return "69";
-    if (lower.includes("shower")) return "shower";
-    if (lower.includes("massage")) return "massage";
-    if (lower.includes("gfe")) return "gfe";
-    if (lower.includes("pse")) return "pse";
-    if (lower.includes("double")) return "double";
-    if (lower.includes("filming")) return "filming";
+  const serviceKey = (service: string) => {
+    const normalized = service.trim().toLowerCase();
 
-    return lower.replace(/[^a-z0-9]/g, "");
+    if (normalized.includes("69")) return "69";
+    if (normalized.includes("shower")) return "shower";
+    if (normalized.includes("massage")) return "massage";
+    if (normalized.includes("gfe")) return "gfe";
+    if (normalized.includes("pse")) return "pse";
+    if (normalized.includes("double")) return "double";
+    if (normalized.includes("filming")) return "filming";
+
+    return normalized.replace(/[^a-z0-9]/g, "");
   };
 
-  const renderServiceLabel = (service: string) => {
-    const key = svcKey(service);
-    return t(`services.${key}`, { defaultValue: service });
+  const renderServiceLabel = (service: string) =>
+    t(`services.${serviceKey(service)}`, {
+      defaultValue: service,
+    });
+
+  const toggleTime = () => {
+    onTimeChange(time === "now" ? "today" : "now");
+    setShowFilters(false);
   };
-
-  const computedActiveCount = useMemo(() => {
-    return selectedNationalities.length + selectedServices.length;
-  }, [selectedNationalities, selectedServices]);
-
-  const count = activeFilterCount ?? computedActiveCount;
 
   const clearFilters = () => {
-    setSelectedNationalities([]);
-    setSelectedServices([]);
-    setTime("now");
+    onClearFilters();
+    onTimeChange("now");
+    setShowFilters(false);
   };
-
-  const openPanel = () => {
-    setShowFilters((v) => !v);
-    setIsDropdownOpen(false);
-    setIsServicesDropdownOpen(false);
-  };
-
-  const isService = (item: string) => allServices.includes(item);
 
   const timeLabel = time === "now" ? t("filter.onNow") : t("filter.seeAll");
 
-  const timeGlow =
-    time === "now"
-      ? "shadow-[0_0_14px_rgba(191,166,99,0.38)]"
-      : "shadow-[0_0_14px_rgba(217,192,124,0.18)]";
-
-  const cycleTime = () => {
-    const next: ShiftStatus = time === "now" ? "today" : "now";
-    setTime(next);
-    setShowFilters(false);
-    setIsDropdownOpen(false);
-    setIsServicesDropdownOpen(false);
-  };
-
   return (
-    <div className="w-full">
-      {/* Selected chips row */}
-      {(selectedNationalities.length > 0 || selectedServices.length > 0) && (
-        <div className="flex flex-wrap gap-2 px-6 mb-4">
-          {[...selectedNationalities, ...selectedServices].map((item) => (
-            <span
-              key={item}
-              className="inline-flex items-center gap-2 px-3 py-1.5 text-sm
-                bg-[#14120f]/80 backdrop-blur
-                border border-[#bfa663]/40
-                text-[#e8d6a8] rounded"
-            >
-              {isService(item) ? renderServiceLabel(item) : item}
-              <button
-                onClick={() =>
-                  selectedNationalities.includes(item)
-                    ? toggleNationality(item)
-                    : toggleService(item)
-                }
-                className="text-[#e8d6a8]/80 hover:text-[#d9c07c] transition"
-                aria-label={`Remove ${item}`}
-              >
-                <X className="w-3 h-3" />
-              </button>
+    <div className="relative shrink-0">
+      <div className="flex items-center gap-2">
+        <button
+          type="button"
+          onClick={toggleTime}
+          aria-pressed={time === "now"}
+          className={`inline-flex shrink-0 items-center gap-2 border px-3 py-2
+            bg-[#14120f]/80 text-sm text-[#e8d6a8]
+            transition-all hover:border-[#d9c07c] hover:text-[#f1e3b8]
+            ${
+              time === "now"
+                ? "border-[#bfa663] shadow-[0_0_14px_rgba(191,166,99,0.38)]"
+                : "border-[#bfa663]/40"
+            }`}
+        >
+          <Clock className="h-4 w-4" />
+          {timeLabel}
+        </button>
+
+        <button
+          type="button"
+          onClick={() => setShowFilters((current) => !current)}
+          aria-expanded={showFilters}
+          className={`inline-flex shrink-0 items-center gap-2 border px-3 py-2
+            bg-[#14120f]/80 text-sm text-[#e8d6a8]
+            transition-all hover:border-[#d9c07c] hover:text-[#f1e3b8]
+            ${
+              showFilters || activeFilterCount > 0
+                ? "border-[#bfa663]"
+                : "border-[#bfa663]/40"
+            }`}
+        >
+          <Filter className="h-4 w-4" />
+          {t("filter.filters")}
+
+          {activeFilterCount > 0 && (
+            <span className="rounded-full border border-[#bfa663]/40 bg-[#bfa663]/20 px-2 py-0.5 text-xs">
+              {activeFilterCount}
             </span>
-          ))}
-        </div>
-      )}
-
-      {/* Button row */}
-      <div className="flex justify-between items-center px-6 mb-6">
-        <div className="flex items-center gap-3">
-          {/* Filters button */}
-          <button
-            onClick={openPanel}
-            className="flex items-center gap-2 px-5 py-2.5
-              bg-[#14120f]/80 backdrop-blur
-              border border-[#bfa663]/40
-              text-[#e8d6a8] text-lg font-sans
-              hover:border-[#d9c07c] hover:text-[#f1e3b8]
-              transition-all"
-          >
-            <Filter className="w-4 h-4" />
-            {t("filter.filters")}
-            {count > 0 && (
-              <span
-                className="ml-1 px-2 py-0.5 text-xs rounded-full
-                  bg-[#bfa663]/20 text-[#e8d6a8]
-                  border border-[#bfa663]/40"
-              >
-                {count}
-              </span>
-            )}
-          </button>
-
-          {/* Time toggle */}
-          <button
-            onClick={cycleTime}
-            className={`flex items-center gap-2 px-5 py-2.5
-              bg-[#14120f]/80 backdrop-blur
-              border border-[#bfa663]/40
-              text-[#e8d6a8] text-lg font-sans
-              hover:border-[#d9c07c] hover:text-[#f1e3b8]
-              transition-all ${timeGlow}`}
-            title="Time filter"
-            aria-pressed="true"
-          >
-            <Clock className="w-4 h-4" />
-            {timeLabel}
-          </button>
-        </div>
-
-        {pageText && (
-          <div className="text-[#bfa663]/70 text-sm sm:text-base tracking-wide">
-            {pageText}
-          </div>
-        )}
+          )}
+        </button>
       </div>
-
-      {/* Filters panel */}
       {showFilters && (
         <div
-          className="mb-8 mx-6 p-5
-            bg-gradient-to-b from-[#14120f] to-[#0f0d0b]
-            border border-[#bfa663]/40
-            shadow-[0_20px_60px_rgba(0,0,0,0.6)]"
-        >
-          {/* Panel header */}
-          <div className="flex justify-end items-center mb-6">
+        className="
+          fixed left-4 right-4 top-32 z-[999]
+          max-h-[70vh] overflow-y-auto
+          border border-[#bfa663]/40
+          bg-gradient-to-b from-[#14120f] to-[#0f0d0b]
+          p-4 shadow-[0_20px_60px_rgba(0,0,0,0.6)]
+        "
+      >
+          <div className="mb-5 flex justify-end">
             <button
+              type="button"
               onClick={clearFilters}
-              className="text-xs tracking-[0.25em]
-                text-[#bfa663]/70 hover:text-[#e8d6a8]
-                transition"
+              className="inline-flex items-center gap-1 text-xs tracking-[0.2em]
+                text-[#bfa663]/70 transition hover:text-[#e8d6a8]"
             >
+              <X className="h-3.5 w-3.5" />
               {t("filter.clear")}
             </button>
           </div>
 
-          {/* NATIONALITY */}
           <div className="mb-6">
-            <h4 className="text-[#bfa663] text-xs tracking-[0.2em] mb-3 font-sans">
+            <h4 className="mb-3 text-xs tracking-[0.2em] text-[#bfa663]">
               NATIONALITY
             </h4>
+
             <div className="flex flex-wrap gap-2">
-              {allNationalities.map((nat) => {
-                const active = selectedNationalities.includes(nat);
+              {allNationalities.map((nationality) => {
+                const selected = selectedNationalities.includes(nationality);
+
                 return (
                   <button
-                    key={nat}
-                    onClick={() => toggleNationality(nat)}
-                    className={`px-4 py-1.5 text-sm tracking-wide border transition-all
-                      ${
-                        active
-                          ? "bg-[#bfa663]/20 border-[#bfa663] text-[#f1e3b8] shadow-[0_0_12px_rgba(191,166,99,0.45)]"
-                          : "bg-[#14120f]/60 border-[#bfa663]/30 text-[#cfc09a] hover:border-[#d9c07c] hover:text-[#f1e3b8]"
-                      }`}
+                    key={nationality}
+                    type="button"
+                    onClick={() => onToggleNationality(nationality)}
+                    aria-pressed={selected}
+                    className={`border px-4 py-1.5 text-sm tracking-wide transition-all ${
+                      selected
+                        ? "border-[#bfa663] bg-[#bfa663]/20 text-[#f1e3b8] shadow-[0_0_12px_rgba(191,166,99,0.45)]"
+                        : "border-[#bfa663]/30 bg-[#14120f]/60 text-[#cfc09a] hover:border-[#d9c07c] hover:text-[#f1e3b8]"
+                    }`}
                   >
-                    {nat}
+                    {nationality}
                   </button>
                 );
               })}
             </div>
           </div>
 
-          {/* SERVICES */}
           <div>
-            <h4 className="text-[#bfa663] text-xs tracking-[0.2em] mb-3 font-sans">
+            <h4 className="mb-3 text-xs tracking-[0.2em] text-[#bfa663]">
               SERVICES
             </h4>
+
             <div className="flex flex-wrap gap-2">
               {allServices.map((service) => {
-                const active = selectedServices.includes(service);
+                const selected = selectedServices.includes(service);
+
                 return (
                   <button
                     key={service}
-                    onClick={() => toggleService(service)}
-                    className={`px-4 py-1.5 text-sm tracking-wide border transition-all
-                      ${
-                        active
-                          ? "bg-[#bfa663]/20 border-[#bfa663] text-[#f1e3b8]"
-                          : "bg-[#14120f]/60 border-[#bfa663]/30 text-[#cfc09a] hover:border-[#d9c07c] hover:text-[#f1e3b8]"
-                      }`}
+                    type="button"
+                    onClick={() => onToggleService(service)}
+                    aria-pressed={selected}
+                    className={`border px-4 py-1.5 text-sm tracking-wide transition-all ${
+                      selected
+                        ? "border-[#bfa663] bg-[#bfa663]/20 text-[#f1e3b8]"
+                        : "border-[#bfa663]/30 bg-[#14120f]/60 text-[#cfc09a] hover:border-[#d9c07c] hover:text-[#f1e3b8]"
+                    }`}
                   >
                     {renderServiceLabel(service)}
                   </button>

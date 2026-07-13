@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import type { RosterModel } from "../types";
 import { orderRosterModels } from "../utils/shuffle";
 
@@ -12,6 +12,7 @@ const EMPTY_MODELS: RosterModel[] = [];
 
 
 function RosterGrid({ models, activeTab }: RosterGridProps) {
+  const location = useLocation();
   const safeModels = models ?? EMPTY_MODELS;
   const orderedModels = useMemo(
     () => orderRosterModels(safeModels, activeTab),
@@ -34,11 +35,15 @@ function RosterGrid({ models, activeTab }: RosterGridProps) {
       <div className="grid grid-cols-2 gap-0 sm:gap-5 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 md:gap-8">
         {orderedModels.map((model) => (
           <Link
-            key={model.id}
-            to={`/profile/${model.slug}`}
-            state={{ fromTab: activeTab, workingTime: model.workingTime }}
-            className="group block relative"
-          >
+          key={model.id}
+          to={`/profile/${model.slug}`}
+          state={{
+            backgroundLocation: location,
+            fromTab: activeTab,
+            workingTime: model.workingTime,
+          }}
+          className="group relative block"
+        >
             {/* Image Card */}
             <div className="relative w-full aspect-[3/4] overflow-hidden">
               <img

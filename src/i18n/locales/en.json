@@ -29,8 +29,8 @@
     "filters": "Filters",
     "nationality": "Nationality",
     "clear": "Clear",
-    "onNow": "On Now",
-    "seeAll": "View All"
+    "onNow": "Now",
+    "seeAll": "All"
   },
   "rates": {
     "min30": "30 Min",

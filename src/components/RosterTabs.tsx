@@ -1,6 +1,7 @@
+// src/components/RosterTabs.tsx
 import { addDays } from "../utils/rosterTime";
 
-type RosterTab = "today" | "tomorrow";
+export type RosterTab = "today" | "tomorrow";
 
 interface RosterTabsProps {
   activeTab: RosterTab;
@@ -10,19 +11,12 @@ interface RosterTabsProps {
 
 function formatRosterDate(date: Date): string {
   return new Intl.DateTimeFormat("en-AU", {
-    weekday: "short",
     day: "numeric",
     month: "long",
-  })
-    .format(date)
-    .replace(",", "");
+  }).format(date);
 }
 
-function RosterTabs({
-  activeTab,
-  shopToday,
-  onChange,
-}: RosterTabsProps) {
+function RosterTabs({ activeTab, shopToday, onChange }: RosterTabsProps) {
   const tabs: Array<{
     id: RosterTab;
     date: Date;
@@ -38,35 +32,26 @@ function RosterTabs({
   ];
 
   return (
-    <div className="mb-10 flex flex-col items-center px-3">
-      <div className="flex w-full max-w-[520px] flex-nowrap items-center justify-center gap-4 text-center sm:gap-8">
-        {tabs.map(({ id, date }) => {
-          const isActive = activeTab === id;
+    <div className="flex shrink-0 items-center">
+      {tabs.map(({ id, date }) => {
+        const isActive = activeTab === id;
 
-          return (
-            <div
-              key={id}
-              className="relative min-w-[140px] flex-1"
-            >
-              <button
-                type="button"
-                onClick={() => onChange(id)}
-                className={`relative w-full font-serif text-lg tracking-wide transition-all sm:text-2xl ${
-                  isActive
-                    ? "bg-gradient-to-r from-[#e3d19b] to-[#bfa663] bg-clip-text font-bold text-transparent"
-                    : "text-[#a79b7a] hover:text-[#d8bf7a]"
-                }`}
-              >
-                {formatRosterDate(date)}
-              </button>
-
-              {isActive && (
-                <span className="absolute -bottom-1 left-1/4 right-1/4 h-[1.5px] bg-gradient-to-r from-transparent via-[#d8bf7a] to-transparent" />
-              )}
-            </div>
-          );
-        })}
-      </div>
+        return (
+          <button
+            key={id}
+            type="button"
+            onClick={() => onChange(id)}
+            aria-pressed={isActive}
+            className={`shrink-0 border px-3 py-2 text-sm font-sans tracking-wide transition-all first:border-r-0 ${
+              isActive
+                ? "border-[#bfa663] bg-[#bfa663]/15 text-[#f1e3b8] shadow-[0_0_14px_rgba(191,166,99,0.28)]"
+                : "border-[#bfa663]/40 bg-[#14120f]/80 text-[#a79b7a] hover:border-[#d9c07c] hover:text-[#e8d6a8]"
+            }`}
+          >
+            {formatRosterDate(date)}
+          </button>
+        );
+      })}
     </div>
   );
 }
