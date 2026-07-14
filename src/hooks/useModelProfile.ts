@@ -89,7 +89,7 @@ export interface ModelProfile {
   services: ProfileService[];
 }
 
-const PROVIDERS_URL = "/api/providers/";
+const PROVIDERS_URL = "/api/proxy?path=providers/";
 
 function pickProfileImage(provider: ApiProvider): string {
   const images = (provider.images || []).filter((image) => image?.image);
