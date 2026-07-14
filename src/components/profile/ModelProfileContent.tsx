@@ -149,27 +149,24 @@ function ModelProfileContent({
             compact
           />
         </div>
-  
+
         {/* Only this area scrolls */}
-<div className="relative min-h-0 flex-1">
-  <div
-    onScroll={(event) => {
-      setHasScrolledProfile(event.currentTarget.scrollTop > 16);
-    }}
-    className="
+        <div className="relative min-h-0 flex-1">
+          <div
+            onScroll={(event) => {
+              setHasScrolledProfile(event.currentTarget.scrollTop > 16);
+            }}
+            className="
       h-full overflow-y-auto overscroll-contain
       px-5 pb-10 pt-3
     "
-  >
-    <ProfileInfo
-      model={model}
-      workingTime={workingTime}
-    />
-  </div>
+          >
+            <ProfileInfo model={model} workingTime={workingTime} />
+          </div>
 
-  {!hasScrolledProfile && (
-    <div
-      className="
+          {!hasScrolledProfile && (
+            <div
+              className="
         pointer-events-none absolute inset-x-0 bottom-0
         flex justify-center
         bg-gradient-to-t
@@ -178,29 +175,19 @@ function ModelProfileContent({
         to-transparent
         pb-2 pt-10
       "
-    >
-      <ChevronDown
-        className="
+            >
+              <ChevronDown
+                className="
           h-5 w-5
           animate-bounce
           text-[#bfa663]/70
         "
-      />
-    </div>
-  )}
-</div>
-  
-        {/* Booking button */}
-        <div className="shrink-0 bg-[#0b0b0b] px-4 py-3">
-          <a
-            href="tel:+61498100011"
-            className="flex w-full items-center justify-center gap-3 bg-[#14120f]/80 px-6 py-4 font-serif font-bold tracking-wide text-[#e8d6a8]"
-          >
-            <Phone className="h-5 w-5" />
-            {t("common.bookNow")}
-          </a>
+              />
+            </div>
+          )}
         </div>
-  
+
+
         <ProfileLightbox
           open={isLightboxOpen}
           name={model.name}
@@ -229,10 +216,7 @@ function ModelProfileContent({
             onOpenLightbox={() => setIsLightboxOpen(true)}
           />
 
-          <ProfileInfo
-            model={model}
-            workingTime={workingTime}
-          />
+          <ProfileInfo model={model} workingTime={workingTime} />
         </div>
       </div>
 

@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { X, Share2 } from "lucide-react";
+import { X, Share2, Phone } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
@@ -77,27 +77,35 @@ function ModelProfileModal() {
         onClick={(event) => event.stopPropagation()}
       >
         {/* Plain modal header */}
-        <div className="relative flex h-12 shrink-0 items-center justify-end px-3">
-          <div className="flex items-center gap-3">
-            <button
-              type="button"
-              onClick={handleShare}
-              aria-label="Share profile"
-              className="text-[#d8cfa5]/80 transition-colors hover:text-[#ead9aa]"
-            >
-              <Share2 className="h-5 w-5" />
-            </button>
+<div className="relative flex h-12 shrink-0 items-center justify-end px-3">
+  <div className="flex items-center gap-3">
+    <a
+      href="tel:+61498100011"
+      aria-label="Book now"
+      className="p-1 text-[#d8cfa5]/80 transition-colors hover:text-[#ead9aa]"
+    >
+      <Phone className="h-4 w-4" />
+    </a>
 
-            <button
-              type="button"
-              onClick={closeModal}
-              aria-label="Close profile"
-              className="text-[#d8cfa5]/80 transition-colors hover:text-[#ead9aa]"
-            >
-              <X className="h-6 w-6" />
-            </button>
-          </div>
-        </div>
+    <button
+      type="button"
+      onClick={handleShare}
+      aria-label="Share profile"
+      className="p-1 text-[#d8cfa5]/80 transition-colors hover:text-[#ead9aa]"
+    >
+      <Share2 className="h-4 w-4" />
+    </button>
+
+    <button
+      type="button"
+      onClick={closeModal}
+      aria-label="Close profile"
+      className="p-1 text-[#d8cfa5]/80 transition-colors hover:text-[#ead9aa]"
+    >
+      <X className="h-5 w-5" />
+    </button>
+  </div>
+</div>
 
         {/* Profile content owns its internal information scroll */}
         <div className="min-h-0 flex-1 overflow-hidden [&>section]:!h-full">
