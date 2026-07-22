@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Calendar, Clock, User, Phone, MessageSquare } from "lucide-react";
+import { Calendar, Clock } from "lucide-react";
 
 interface BookingFlowProps {
   provider: any;
@@ -16,8 +16,6 @@ function BookingFlow({ provider, onBack }: BookingFlowProps) {
 
   const durations = [30, 45, 60] as const;
   const availableTimes = ["13:00", "14:00", "15:30", "17:00", "19:30", "21:00"];
-
-  const depositAmount = 50;
 
   const handleConfirm = () => {
     if (!selectedTime || !clientName || !clientPhone) {
