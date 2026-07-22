@@ -5,9 +5,10 @@ import type { ModelProfile } from "../../hooks/useModelProfile";
 interface ProfileInfoProps {
   model: ModelProfile;
   workingTime?: string;
+  onBookNow?: () => void;
 }
 
-function ProfileInfo({ model, workingTime }: ProfileInfoProps) {
+function ProfileInfo({ model, workingTime, onBookNow }: ProfileInfoProps) {
   const { t } = useTranslation();
   const profileDetails = [
     model.nationality
@@ -110,7 +111,7 @@ function ProfileInfo({ model, workingTime }: ProfileInfoProps) {
   return (
     <div className="space-y-5">
       {/* Header */}
-      <header className="pt-2 text-center lg:text-left">
+      <header className="pt-2 text-center">
         <h1 className="bg-gradient-to-r from-[#f0dfb5] via-[#d9c083] to-[#a98c48] bg-clip-text font-serif text-4xl font-bold tracking-tight text-transparent sm:text-5xl">
           {model.name}
         </h1>
@@ -120,6 +121,25 @@ function ProfileInfo({ model, workingTime }: ProfileInfoProps) {
             {workingTime}
           </p>
         )}
+
+        {/* Book Now Button */}
+{onBookNow && (
+  <button
+    onClick={onBookNow}
+    className="
+      mt-8 w-full max-w-[260px] mx-auto
+      bg-[#d4af37] hover:bg-[#e8c14a]
+      text-black font-medium text-[17px]
+      py-3.5 px-8
+      border border-[#f0d070]/30
+      transition-all duration-200
+      active:scale-[0.985]
+      flex items-center justify-center gap-2
+    "
+  >
+    Book Now with {model.name}
+  </button>
+)}
       </header>
 
       {/* Rates */}

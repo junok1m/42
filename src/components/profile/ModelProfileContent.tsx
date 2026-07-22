@@ -13,11 +13,14 @@ import ProfileLightbox from "./ProfileLightbox";
 interface ModelProfileContentProps {
   workingTime?: string;
   variant?: "page" | "modal";
+  provider?: any;
+  onBookNow?: () => void;
 }
 
 function ModelProfileContent({
   workingTime,
   variant = "page",
+  onBookNow
 }: ModelProfileContentProps) {
   const { slug } = useParams<{ slug: string }>();
   const { t } = useTranslation();
@@ -161,7 +164,11 @@ function ModelProfileContent({
       px-5 pb-10 pt-3
     "
           >
-            <ProfileInfo model={model} workingTime={workingTime} />
+            <ProfileInfo
+              model={model}
+              workingTime={workingTime}
+              onBookNow={onBookNow || undefined}
+            />
           </div>
 
           {!hasScrolledProfile && (
@@ -186,7 +193,6 @@ function ModelProfileContent({
             </div>
           )}
         </div>
-
 
         <ProfileLightbox
           open={isLightboxOpen}

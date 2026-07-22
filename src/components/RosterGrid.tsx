@@ -41,6 +41,7 @@ function RosterGrid({ models, activeTab }: RosterGridProps) {
             backgroundLocation: location,
             fromTab: activeTab,
             workingTime: model.workingTime,
+            provider: model,
           }}
           className="group relative block"
         >
