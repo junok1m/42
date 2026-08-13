@@ -122,24 +122,25 @@ function ProfileInfo({ model, workingTime, onBookNow }: ProfileInfoProps) {
           </p>
         )}
 
-        {/* Book Now Button */}
-{onBookNow && (
-  <button
-    onClick={onBookNow}
-    className="
-      mt-8 w-full max-w-[260px] mx-auto
-      bg-[#d4af37] hover:bg-[#e8c14a]
-      text-black font-medium text-[17px]
-      py-3.5 px-8
-      border border-[#f0d070]/30
-      transition-all duration-200
-      active:scale-[0.985]
-      flex items-center justify-center gap-2
-    "
-  >
-    Book Now with {model.name}
-  </button>
-)}
+        {/* Book Now Button - currently unused
+        {onBookNow && (
+          <button
+            onClick={onBookNow}
+            className="
+              mt-8 w-full max-w-[260px] mx-auto
+              bg-[#d4af37] hover:bg-[#e8c14a]
+              text-black font-medium text-[17px]
+              py-3.5 px-8
+              border border-[#f0d070]/30
+              transition-all duration-200
+              active:scale-[0.985]
+              flex items-center justify-center gap-2
+            "
+          >
+            Book Now with {model.name}
+          </button>
+        )}
+        */}
       </header>
 
       {/* Rates */}
