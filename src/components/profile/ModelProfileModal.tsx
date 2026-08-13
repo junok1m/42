@@ -83,7 +83,6 @@ function ModelProfileModal() {
             <ModelProfileContent
               workingTime={workingTime}
               variant="modal"
-              onBookNow={openBooking}
               provider={provider}
             />
           ) : (
