@@ -5,10 +5,9 @@ import type { ModelProfile } from "../../hooks/useModelProfile";
 interface ProfileInfoProps {
   model: ModelProfile;
   workingTime?: string;
-  onBookNow?: () => void;
 }
 
-function ProfileInfo({ model, workingTime, onBookNow }: ProfileInfoProps) {
+function ProfileInfo({ model, workingTime }: ProfileInfoProps) {
   const { t } = useTranslation();
   const profileDetails = [
     model.nationality
