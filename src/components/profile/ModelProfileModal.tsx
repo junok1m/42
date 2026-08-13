@@ -25,10 +25,6 @@ function ModelProfileModal() {
     navigate(-1);
   };
 
-  const openBooking = () => {
-    setViewMode("booking");
-  };
-
   const backToProfile = () => {
     setViewMode("profile");
   };
