@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
@@ -27,9 +28,44 @@ function ProfileGallery({
   onOpenLightbox,
 }: ProfileGalleryProps) {
   const { t } = useTranslation();
+  const touchStartX = useRef<number | null>(null);
+  const touchStartY = useRef<number | null>(null);
 
   const hasImages = images.length > 0;
   const hasMultipleImages = images.length > 1;
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+    touchStartY.current = e.touches[0].clientY;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null || touchStartY.current === null) return;
+
+    const touchEndX = e.changedTouches[0].clientX;
+    const touchEndY = e.changedTouches[0].clientY;
+
+    const deltaX = touchEndX - touchStartX.current;
+    const deltaY = touchEndY - touchStartY.current;
+
+    // Only treat as horizontal swipe if horizontal movement is dominant
+    if (Math.abs(deltaX) < 50 || Math.abs(deltaX) < Math.abs(deltaY)) {
+      touchStartX.current = null;
+      touchStartY.current = null;
+      return;
+    }
+
+    if (deltaX > 0) {
+      // Swipe right → previous
+      onPrevious();
+    } else {
+      // Swipe left → next
+      onNext();
+    }
+
+    touchStartX.current = null;
+    touchStartY.current = null;
+  };
 
   return (
     <div
@@ -39,7 +75,11 @@ function ProfileGallery({
       `}
     >
       {/* Main image */}
-      <div className="relative aspect-[3/4] w-full overflow-hidden bg-[#0b0b0b]">
+      <div
+        className="relative aspect-[3/4] w-full overflow-hidden bg-[#0b0b0b] touch-pan-y"
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+      >
         {hasImages ? (
           <button
             type="button"
@@ -50,7 +90,8 @@ function ProfileGallery({
             <img
               src={images[currentIndex]}
               alt={`${name} - Photo ${currentIndex + 1}`}
-              className="h-full w-full cursor-zoom-in object-cover object-top"
+              className="h-full w-full cursor-zoom-in object-cover object-top pointer-events-none"
+              draggable={false}
             />
           </button>
         ) : (
