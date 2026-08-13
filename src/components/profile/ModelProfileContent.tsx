@@ -14,13 +14,11 @@ interface ModelProfileContentProps {
   workingTime?: string;
   variant?: "page" | "modal";
   provider?: any;
-  onBookNow?: () => void;
 }
 
 function ModelProfileContent({
   workingTime,
-  variant = "page",
-  onBookNow
+  variant = "page"
 }: ModelProfileContentProps) {
   const { slug } = useParams<{ slug: string }>();
   const { t } = useTranslation();
@@ -167,7 +165,6 @@ function ModelProfileContent({
             <ProfileInfo
               model={model}
               workingTime={workingTime}
-              onBookNow={onBookNow || undefined}
             />
           </div>
 
