@@ -20,6 +20,7 @@ export interface RosterModel extends Model {
   isNew: boolean;
   isRealPhoto: boolean;   // 👈 badge
   services?: Service[];
+  hourly?: number;
 }
 export interface NewsItem {
   id: number;

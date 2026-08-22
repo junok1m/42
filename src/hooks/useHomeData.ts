@@ -39,6 +39,10 @@ function buildRoster(
         isNew: provider.is_new === true,
         isRealPhoto: hasAnyRealPhoto(provider),
         services: servicesFromProvider(provider),
+        hourly:
+          typeof provider.total_60 === "number" && provider.total_60 > 0
+            ? provider.total_60
+            : undefined,
       },
     ];
   });

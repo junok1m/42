@@ -102,11 +102,17 @@ function RosterGrid({ models, activeTab }: RosterGridProps) {
 
                 {model.workingTime && (
                   <p
-                    className="font-sans text-gray-200 text-xs sm:text-sm mt-1 flex items-center"
+                    className="font-sans text-gray-200 text-xs sm:text-sm mt-1 flex items-center gap-2"
                     style={{ textShadow: "0 0 10px rgba(0,0,0,0.9)" }}
                   >
-                    <span className="w-2 h-2 bg-[#d2b97b] rounded-full mr-2 shadow-[0_0_6px_#bfa663]" />
+                    <span className="w-2 h-2 bg-[#d2b97b] rounded-full shadow-[0_0_6px_#bfa663]" />
                     {model.workingTime}
+
+                    {typeof model.hourly === "number" && (
+                      <span className="text-[#d2b97b] font-medium">
+                        · ${model.hourly}/hr
+                      </span>
+                    )}
                   </p>
                 )}
               </div>
