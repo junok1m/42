@@ -37,6 +37,7 @@ function buildRoster(
           entry.end_time
         ),
         isNew: provider.is_new === true,
+        isBack: provider.is_back === true,
         isRealPhoto: hasAnyRealPhoto(provider),
         services: servicesFromProvider(provider),
         hourly:

@@ -75,6 +75,10 @@
   0%, 100% { box-shadow: 0 0 6px rgba(191, 166, 99, 0.6); }
   50% { box-shadow: 0 0 14px rgba(191, 166, 99, 0.95); }
 }
+@keyframes backGlow {
+  0%, 100% { box-shadow: 0 0 5px rgba(255, 255, 255, 0.28); }
+  50% { box-shadow: 0 0 12px rgba(255, 255, 255, 0.58); }
+}
 @keyframes newGlow {
   0% {
     box-shadow: 0 0 6px rgba(214, 122, 122, 0.6);

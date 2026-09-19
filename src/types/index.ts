@@ -18,6 +18,7 @@ export interface Service {
 export interface RosterModel extends Model {
   workingTime: string;
   isNew: boolean;
+  isBack: boolean;
   isRealPhoto: boolean;   // 👈 badge
   services?: Service[];
   hourly?: number;

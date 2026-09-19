@@ -85,6 +85,24 @@ function RosterGrid({ models, activeTab }: RosterGridProps) {
                     </span>
                   )}
 
+                  {!model.isNew && model.isBack && (
+                    <span
+                      className="
+                        px-1 py-0.5
+                        text-[8px] font-semibold tracking-[0.1em]
+                        text-[#f2f0ea]
+                        border border-white/25
+                        bg-gradient-to-br from-[#202020] to-[#050505]
+                      "
+                      style={{
+                        textShadow: "0 1px 0 rgba(255,255,255,0.18)",
+                        animation: "backGlow 4.2s ease-in-out infinite",
+                      }}
+                    >
+                      CAME BACK
+                    </span>
+                  )}
+
                   <h3
                     className="font-serif text-white text-lg sm:text-2xl font-semibold leading-tight"
                     style={{ textShadow: "0 0 12px rgba(0,0,0,0.9)" }}

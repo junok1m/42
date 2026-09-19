@@ -21,6 +21,7 @@ export type ApiProviderImage = {
     images?: ApiProviderImage[];
   
     is_new?: boolean;
+    is_back?: boolean;
   
     service_bbbj?: boolean;
     service_cim?: boolean;
