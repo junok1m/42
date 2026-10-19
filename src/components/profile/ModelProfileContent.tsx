@@ -156,7 +156,7 @@ function ModelProfileContent({
           />
         </div>
 
-        {/* Only this area scrolls */}
+        {/* Mobile scrolls the whole profile; desktop scrolls details only. */}
         <div className="relative md:min-h-0 md:flex-1 md:min-w-0">
           <div
             onScroll={(event) => {
