@@ -30,6 +30,9 @@ type ApiProvider = {
 
   images?: ApiProviderImage[];
   is_new?: boolean;
+  Medical?: boolean;
+  medical?: boolean;
+  service_medical?: boolean;
 
   service_bbbj?: boolean;
   service_cim?: boolean;
@@ -66,6 +69,7 @@ export interface ModelProfile {
   profileImage: string;
 
   isNew: boolean;
+  medicalCheckup: boolean;
 
   cup?: string;
   height?: number;
@@ -184,6 +188,10 @@ function mapProviderToModel(provider: ApiProvider): ModelProfile {
 
     profileImage,
     isNew: provider.is_new === true,
+    medicalCheckup:
+      provider.Medical === true ||
+      provider.medical === true ||
+      provider.service_medical === true,
 
     cup: normalizeOptionalText(provider.cup),
 
