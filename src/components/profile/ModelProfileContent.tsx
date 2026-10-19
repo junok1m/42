@@ -134,8 +134,13 @@ function ModelProfileContent({
 
   if (variant === "modal") {
     return (
-      <section className="flex h-full min-h-0 flex-col bg-[#0b0b0b] md:flex-row">
-        {/* Fixed gallery */}
+      <section
+        onScroll={(event) => {
+          setHasScrolledProfile(event.currentTarget.scrollTop > 16);
+        }}
+        className="flex h-full min-h-0 flex-col overflow-x-hidden overflow-y-auto overscroll-contain touch-pan-y bg-[#0b0b0b] md:overflow-hidden md:flex-row"
+      >
+        {/* Mobile: gallery joins the page scroll. Tablet/desktop: gallery stays fixed. */}
         <div className="shrink-0 px-3 pb-2 pt-1 md:flex md:w-[42%] md:items-center md:justify-center md:border-r md:border-[#bfa663]/20 md:px-5 md:py-4">
           <ProfileGallery
             name={model.name}
@@ -152,14 +157,14 @@ function ModelProfileContent({
         </div>
 
         {/* Only this area scrolls */}
-        <div className="relative min-h-0 flex-1 md:min-w-0">
+        <div className="relative md:min-h-0 md:flex-1 md:min-w-0">
           <div
             onScroll={(event) => {
               setHasScrolledProfile(event.currentTarget.scrollTop > 16);
             }}
             className="
-      h-full overflow-y-auto overscroll-contain
-      px-5 pb-10 pt-3 md:overflow-x-hidden md:touch-pan-y md:px-6 lg:px-8
+      h-auto overflow-visible px-5 pb-10 pt-3
+      md:h-full md:overflow-x-hidden md:overflow-y-auto md:overscroll-contain md:touch-pan-y md:px-6 lg:px-8
     "
           >
             <ProfileInfo
