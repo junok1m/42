@@ -250,6 +250,13 @@ function ProfileInfo({ model, workingTime }: ProfileInfoProps) {
           />
         </section>
       )}
+
+      {model.medicalCheckup && (
+        <p className="text-xs font-medium text-emerald-500">
+          <Check className="mr-1 inline h-3.5 w-3.5" aria-hidden="true" />
+          Medical check-up
+        </p>
+      )}
     </div>
   );
 }
