@@ -33,11 +33,11 @@ function ModelProfileModal() {
     <div
       role="dialog"
       aria-modal="true"
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 p-3 sm:p-6"
+      className="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 p-3 sm:p-6 md:p-8"
       onClick={closeModal}
     >
       <div
-        className="flex h-[calc(100dvh-24px)] w-full max-w-[430px] flex-col overflow-hidden rounded-[18px] bg-[#0b0b0b] sm:h-[calc(100dvh-48px)]"
+        className="flex h-[calc(100dvh-24px)] w-full max-w-[430px] flex-col overflow-hidden rounded-[18px] bg-[#0b0b0b] sm:h-[calc(100dvh-48px)] md:h-[min(88dvh,900px)] md:max-w-[760px] lg:max-w-[1080px]"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
